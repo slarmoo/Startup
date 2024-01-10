@@ -1,1 +1,1 @@
-Slay
+Slay every day
