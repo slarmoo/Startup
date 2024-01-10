@@ -1,1 +1,1 @@
-Slay the day away
+Slay every day away
