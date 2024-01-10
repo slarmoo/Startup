@@ -1,1 +1,1 @@
-Slay
+Slay the day away
