@@ -3,7 +3,7 @@
 Do you have a social media addiction? Try out Taco Talk, the social media that only works on Tuesdays! (Or whatever day you set for yourself in the settings). Using Taco Talk, you can still communicate with your friends while limiting the amount of time that you waste. You can comment on friend's pages and post things to your own. Taco Talk is *the* social media for talking with friends whilst still curbing your social media addiction. 
 
 ### Design
-C:\Users\matth\Downloads\IMG_20240117_173457265.jpg
+![Image of how the webpages will look and interact with each other](image.png)
 
 ### Key Features
 + Secure HTTPS login
