@@ -5,4 +5,4 @@ I learned about pushing and pulling (basically saving and syncing), merging conf
 ## HTML
 blocks and inlines:
 Spans create blocks inline, divs create blocks out of line
-<p><span></span></p> <div></div>
+\<p\>\<span\>\</span\>\</p\> \<div\>\</div\>
