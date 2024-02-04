@@ -26,3 +26,15 @@ If time permits...
 + DB/Login - Create login, keep login credentials, assign login name to posts, and remember settings
 + WebSocket - People's posts are made immediately visible to other
 + React - Application ported to use the React web framework.
+
+### HTML deliverable
+
+For this deliverable I built out the structure of my application using HTML.
+
++ HTML - Five HTML pages for loging in, signing up, browsing posts, posting posts, and a settings page. 
++ Links - The login page and the sign-up page link to each other, while the login page, browse page, settings page, and index page all have a nav tag with links to each other. 
++ Text - All posts will have a text description given by the user that posted it. For now, it is just placeholder text. 
++ Images - Included logo images on every page and a placeholder image in browse. 
++ Login - Input box and submit button for login along with a separate sign up page. 
++ Database - The settings choices will be stored in the database along with posts people have made. 
++ WebSocket - Posts that people browse will be updated in real time. 
