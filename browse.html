@@ -6,33 +6,33 @@
     </head>
     <body>
         <header>
-            <h1 style="display:inline">Taco Talk</h1> <img src="taco.png" alt="TacoTalk logo" width="50" style="display:inline">
+            <h1 class="title" style="display:inline">Taco Talk</h1> <img src="taco.png" alt="TacoTalk logo" width="50" style="display:inline">
             <hr>
-            <h2>Browse</h2>
-            <nav>
+            <h2 class="pagename">Browse</h2>
+            <nav class="sidebar">
                 <menu>
                   <li><a href="browse.html">Browse</a></li>
                   <li><a href="post.html">Post</a></li>
                   <li><a href="settings.html">Settings</a></li>
                   <li><a href="index.html">Login</a></li>
                 </menu>
-              </nav>
+            </nav>
         </header>
         <hr>
         <!--Browse Posts-->
         <main>
             <h3>Username</h3>
             <!--This will use real-time communication-->
-            <div>
-                <p>Placeholder Text</p>
+            <div class="post">
+                <p class="postText">Placeholder Text</p>
                 <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Placeholder_view_vector.svg" alt="Placeholder image" width="150">
-                <label>Like</label>
-                <input type="checkbox" name="like"/>
+                <label id="like">Like</label>
+                <input type="checkbox" name="like" id="likeCheck"/>
             </div>
         </main>
         <hr>
         <footer>
-            <p>Creator: Matthew Medford</p>
+            <p  class="text2">Creator: Matthew Medford</p>
             <a href=https://github.com/slarmoo/Startup/tree/main>Github</a>
         </footer>
     </body>
