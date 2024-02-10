@@ -23,6 +23,11 @@ hr {
 header {
     flex: 0, 70px;
     background: #dddd00;
+    padding: 1em;
+}
+
+.title {
+    margin-right: 0.5em;
 }
 
 main {
@@ -34,7 +39,7 @@ main {
 nav {
     flex: 0, 100px;
     background: black;
-    
+    padding: 0.5em;
 }
 
 menu {
@@ -46,7 +51,6 @@ menu {
 
 li {
     list-style: circle;
-    
 }
 
 .bulk {
@@ -60,12 +64,23 @@ li {
 .bulk > * {
     margin: 0.5em;
     display: flex;
+}
 
+.text1 {
+    margin-right: 0.5em;
+}
+
+#loginnew {
+    margin: 0.5em;
+    display: flex;
+    flex-direction: row;
 }
 
 #login {
     flex:1;
     justify-content: start;
+    background: black;
+    margin-right: 6em;
 }
 
 #new {
@@ -76,9 +91,9 @@ li {
 footer {
     flex: 0, 30px;
     background: red;
+    padding: 1em;
 }
 
 footer > * {
-    padding: 0.5em;
+    padding: 0.25em;
 }
-
