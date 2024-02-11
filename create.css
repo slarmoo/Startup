@@ -14,6 +14,7 @@ body {
     background: #C92424;
     margin: 0;
     height: 100%;
+    
 }
 
 hr {
@@ -42,18 +43,57 @@ nav {
     background: #212121;
     padding: 0.5em;
 }
+@media (orientation: landscape) {
+    .bulk {
+        grid-template-columns: repeat(2, 1fr);
+    }
 
+    #wrapper {
+        display: contents;
+
+    }
+  }
+
+@media (orientation: portrait) {
+    .bulk {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    #wrapper {
+        display: flex;
+    }
+
+    #signup {
+        flex: 1;
+    }
+
+    #signin {
+        flex: 1;
+    }
+}
+  
 .bulk {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
+    flex: 10;
+    padding: 2em;
+    display: grid;
+    justify-self: center;
+    align-self: center;
+    grid-auto-rows: 100px;
+    grid-gap: 0em;
     justify-content: center;
-    align-items: center;
+    align-items: start;
 }
 
-.bulk > * {
+.card {
     margin: 0.5em;
-    display: flex;
+    align-items: start;
+    align-self: start;
+    justify-content: center;
+    justify-self: start;
+}
+
+#signup {
+    justify-self: center;
 }
 
 .text1 {
@@ -65,11 +105,12 @@ input {
 }
 
 button {
-    flex:1;
-    justify-content: start;
     background: #fC8f14;
     margin-right: 6em;
     border: solid black 2px;
+    padding: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 footer {
