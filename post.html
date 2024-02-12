@@ -3,13 +3,21 @@
     <head>
         <meta charset="UTF-8" />
         <title>TacoTalk HTML Post</title>
+        <link rel="stylesheet" href="post.css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
     </head>
     <body>
         <header>
             <h1 class="title" style="display:inline">Taco Talk</h1> <img src="taco.png" alt="TacoTalk logo" width="50" style="display:inline">
             <hr>
-            <h2 class="pagename">Create a Post</h2>
+            
+        </header>
+        <hr>
+        <!--Make a post-->
+        <main>
             <nav class="sidebar">
+                <h2 class="pagename">Create a Post</h2> 
+                <h3>Username</h3>
                 <menu>
                   <li><a href="browse.html">Browse</a></li>
                   <li><a href="post.html">Post</a></li>
@@ -17,18 +25,13 @@
                   <li><a href="index.html">Login</a></li>
                 </menu>
             </nav>
-        </header>
-        <hr>
-        <!--Make a post-->
-        <main>
-            <h3>Username</h3>
             <textarea></textarea>
             <div></div>
             <input type="file" accept=".jpeg,.png,.tiff,.pdf" />
         </main>
         <hr>
         <footer>
-            <p  class="text2">Creator: Matthew Medford</p>
+            <label  class="text2">Creator: Matthew Medford</label>
             <a href=https://github.com/slarmoo/Startup/tree/main>Github</a>
         </footer>
     </body>

@@ -1,0 +1,137 @@
+* {
+    font-family: arial;
+    color: white;
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    background: #C92424;
+    margin: 0;
+    height: 100%;
+}
+
+hr {
+    display: none;
+}
+
+header {
+    flex: 0, 70px;
+    background: #ffC814;
+    padding: 1em;
+    border-bottom: solid black 2px;
+}
+
+.title {
+    margin-right: 0.5em;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+}
+
+nav {
+    flex: 0, 100px;
+    background: #212121;
+    padding: 0.5em;
+}
+
+menu {
+    padding: 0;
+    margin: 0.5em;
+    justify-content: start;
+    align-items: center;
+}
+
+li {
+    list-style: circle;
+}
+
+.bulk {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.bulk > * {
+    margin: 0.5em;
+    display: flex;
+}
+
+.text1 {
+    margin-right: 0.5em;
+}
+
+textarea {
+    color: black;
+}
+
+@media (orientation: landscape) {
+    .bulk {
+        grid-template-columns: repeat(auto-fill, minmax(30vh, 1fr));
+    }
+
+    #wrapper {
+        display: contents;
+
+    }
+  }
+
+@media (orientation: portrait) {
+    .bulk {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+  
+.bulk {
+    flex: 10;
+    padding: 2em;
+    display: grid;
+    justify-self: center;
+    align-self: center;
+    grid-auto-rows: 300px;
+    grid-gap: 1em;
+    justify-content: center;
+    align-items: start;
+    grid-template-rows: 30vh;
+}
+
+.card {
+    margin: 0.5em;
+    align-items: start;
+    align-self: start;
+    justify-content: center;
+    justify-self: start;
+    background-color: #212121;
+    border: solid black 5px;
+    padding: 5em;
+}
+
+.text1 {
+    margin-right: 0.5em;
+}
+
+input {
+    color: black;
+}
+
+
+footer {
+    flex: 0, 30px;
+    background: #ffC814;
+    padding: 1em;
+    border-top: solid black 2px;
+}
+
+footer > * {
+    padding: 0.25em;
+}

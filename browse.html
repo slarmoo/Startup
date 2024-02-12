@@ -3,13 +3,20 @@
     <head>
         <meta charset="UTF-8" />
         <title>TacoTalk HTML Browse</title>
+        <link rel="stylesheet" href="browse.css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
     </head>
     <body>
         <header>
             <h1 class="title" style="display:inline">Taco Talk</h1> <img src="taco.png" alt="TacoTalk logo" width="50" style="display:inline">
             <hr>
-            <h2 class="pagename">Browse</h2>
+        </header>
+        <hr>
+        <!--Browse Posts-->
+        <main>
             <nav class="sidebar">
+                <h2 class="pagename">Browse</h2>
+                <h3>Username</h3>
                 <menu>
                   <li><a href="browse.html">Browse</a></li>
                   <li><a href="post.html">Post</a></li>
@@ -17,28 +24,37 @@
                   <li><a href="index.html">Login</a></li>
                 </menu>
             </nav>
-        </header>
-        <hr>
-        <!--Browse Posts-->
-        <main>
-            <h3>Username</h3>
             <!--This will use real-time communication-->
-            <div class="post">
-                <p class="postText">Placeholder Text</p>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Placeholder_view_vector.svg" alt="Placeholder image" width="150">
-                <label class="like">Like</label>
-                <input type="checkbox" name="like" class="likeCheck"/>
-            </div>
-            <div class="post">
-                <p class="postText">Placeholder Text</p>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Placeholder_view_vector.svg" alt="Placeholder image" width="150">
-                <label class="like">Like</label>
-                <input type="checkbox" name="like" class="likeCheck"/>
+            <div class="bulk">
+                <div class="card">
+                    <p class="postText">Placeholder Text</p>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Placeholder_view_vector.svg" alt="Placeholder image" width="150">
+                    <label class="like">Like</label>
+                    <input type="checkbox" name="like" class="likeCheck"/>
+                </div>
+                <div class="card">
+                    <p class="postText">Placeholder Text</p>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Placeholder_view_vector.svg" alt="Placeholder image" width="150">
+                    <label class="like">Like</label>
+                    <input type="checkbox" name="like" class="likeCheck"/>
+                </div>
+                <div class="card">
+                    <p class="postText">Placeholder Text</p>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Placeholder_view_vector.svg" alt="Placeholder image" width="150">
+                    <label class="like">Like</label>
+                    <input type="checkbox" name="like" class="likeCheck"/>
+                </div>
+                <div class="card">
+                    <p class="postText">Placeholder Text</p>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Placeholder_view_vector.svg" alt="Placeholder image" width="150">
+                    <label class="like">Like</label>
+                    <input type="checkbox" name="like" class="likeCheck"/>
+                </div>
             </div>
         </main>
         <hr>
         <footer>
-            <p  class="text2">Creator: Matthew Medford</p>
+            <label class="text2">Creator: Matthew Medford</label>
             <a href=https://github.com/slarmoo/Startup/tree/main>Github</a>
         </footer>
     </body>
