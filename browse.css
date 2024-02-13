@@ -2,6 +2,8 @@
     font-family: arial;
     color: white;
     box-sizing: border-box;
+    padding: 0; 
+    margin: 0;
 }
 
 html {
@@ -14,6 +16,7 @@ body {
     background: linear-gradient(to right, #C92424, #DB1A1A);
     margin: 0;
     height: 100%;
+    width: 100vw;
 }
 
 hr {
@@ -25,6 +28,7 @@ header {
     background: linear-gradient(to right, #ffC814, #FFDE14);
     padding: 1em;
     border-bottom: solid black 2px;
+    width: 100vw;
 }
 
 .title {
@@ -54,19 +58,6 @@ li {
     list-style: circle;
 }
 
-.bulk {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.bulk > * {
-    margin: 0.5em;
-    display: flex;
-}
-
 .text1 {
     margin-right: 0.5em;
 }
@@ -75,40 +66,55 @@ textarea {
     color: black;
 }
 
-@media (orientation: landscape) {
+@media screen and (max-width: 410px) {
     .bulk {
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        width: 70%;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+        grid-auto-rows: 200px;
     }
-  }
-
-@media (orientation: portrait) {
-    .bulk {
-        grid-template-columns: repeat(1, 1fr);
-        align-items: center;
-        justify-content: center;
+    .card {
+        margin: 0.1em; 
     }
+    .postImage {
+        width: 70%;
+        margin-left: 1.5em;
+    }
+    .card > div {
+        margin: 0.5em;
+        margin-left: 1em;
+        margin-right: 1em;
+    }    
 }
-  
-.bulk {
-    /*flex: 10;
-    padding: 2em;
-    display: grid;
-    justify-self: center;
-    align-self: center;
-    grid-auto-rows: 30vh;
-    grid-gap: 1em;
-    justify-content: center;
-    align-items: start;
-    grid-template-rows: 30vh;*/
 
+@media screen and (min-width: 410px) {
+    .bulk {
+        width: 100%;      
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        grid-auto-rows: 300px;
+    }
+    .card {
+        margin: 1em;
+    }
+    .postImage {
+        width: 100%;
+    }
+    .card > div {
+        margin: 0.5em;
+        margin-left: 3.5em;
+        margin-right: 3.5em;
+    }    
+}
+
+.bulk {
+    flex: 1;
+    justify-content: center;
+    align-items: center;
     height: 100%;
     display: grid;
-    grid-auto-rows: 300px;
     grid-gap: 1em;
 }
 
 .card {
-    margin: 1em;
     align-items: start;
     align-self: start;
     justify-content: center;
@@ -124,10 +130,7 @@ textarea {
     align-self: center;
     justify-content: center;
     justify-self: center;
-    margin: 0.5em;
-    flex: 1/3;
-    margin-left: 3.5em;
-    margin-right: 3.5em;
+    flex: 1;
 }
 
 .text1 {
