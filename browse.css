@@ -11,7 +11,7 @@ html {
 body {
     display: flex;
     flex-direction: column;
-    background: #C92424;
+    background: linear-gradient(to right, #C92424, #DB1A1A);
     margin: 0;
     height: 100%;
 }
@@ -22,7 +22,7 @@ hr {
 
 header {
     flex: 0, 70px;
-    background: #ffC814;
+    background: linear-gradient(to right, #ffC814, #FFDE14);
     padding: 1em;
     border-bottom: solid black 2px;
 }
@@ -77,43 +77,57 @@ textarea {
 
 @media (orientation: landscape) {
     .bulk {
-        grid-template-columns: repeat(auto-fill, minmax(30vh, 1fr));
-    }
-
-    #wrapper {
-        display: contents;
-
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     }
   }
 
 @media (orientation: portrait) {
     .bulk {
         grid-template-columns: repeat(1, 1fr);
+        align-items: center;
+        justify-content: center;
     }
 }
   
 .bulk {
-    flex: 10;
+    /*flex: 10;
     padding: 2em;
     display: grid;
     justify-self: center;
     align-self: center;
-    grid-auto-rows: 300px;
+    grid-auto-rows: 30vh;
     grid-gap: 1em;
     justify-content: center;
     align-items: start;
-    grid-template-rows: 30vh;
+    grid-template-rows: 30vh;*/
+
+    height: 100%;
+    display: grid;
+    grid-auto-rows: 300px;
+    grid-gap: 1em;
 }
 
 .card {
-    margin: 0.5em;
+    margin: 1em;
     align-items: start;
     align-self: start;
     justify-content: center;
     justify-self: start;
     background-color: #212121;
     border: solid black 5px;
-    padding: 5em;
+    display: flex;
+    flex-direction: column;
+}
+
+.card > div {
+    align-items: center;
+    align-self: center;
+    justify-content: center;
+    justify-self: center;
+    margin: 0.5em;
+    flex: 1/3;
+    margin-left: 3.5em;
+    margin-right: 3.5em;
 }
 
 .text1 {
@@ -124,10 +138,33 @@ input {
     color: black;
 }
 
+.postText {
+    display: block;
+    align-items: center;
+    align-self: center;
+    justify-content: center;
+    justify-self: center;
+}
+
+.postImage {
+    display: block;
+    align-items: center;
+    align-self: center;
+    justify-content: center;
+    justify-self: center;
+}
+
+.like {
+    display: block;
+    align-items: center;
+    align-self: center;
+    justify-content: center;
+    justify-self: center;
+}
 
 footer {
     flex: 0, 30px;
-    background: #ffC814;
+    background: linear-gradient(to right, #ffC814, #FFDE14);
     padding: 1em;
     border-top: solid black 2px;
 }

@@ -11,7 +11,7 @@ html {
 body {
     display: flex;
     flex-direction: column;
-    background: #C92424;
+    background: linear-gradient(to right, #C92424, #DB1A1A);
     margin: 0;
     height: 100%;
 }
@@ -22,7 +22,7 @@ hr {
 
 header {
     flex: 0, 70px;
-    background: #ffC814;
+    background: linear-gradient(to right, #ffC814, #FFDE14);
     padding: 1em;
     border-bottom: solid black 2px;
 }
@@ -102,7 +102,7 @@ input {
 
 footer {
     flex: 0, 30px;
-    background: #ffC814;
+    background: linear-gradient(to right, #ffC814, #FFDE14);;
     padding: 1em;
     border-top: solid black 2px;
 }
