@@ -1,0 +1,111 @@
+* {
+    font-family: arial;
+    color: white;
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(to right, #C92424, #DB1A1A);
+    margin: 0;
+    height: 100%;
+}
+
+hr {
+    display: none;
+}
+
+header {
+    flex: 0, 70px;
+    background: linear-gradient(to right, #ffC814, #FFDE14);
+    padding: 1em;
+    border-bottom: solid black 2px;
+}
+
+.title {
+    margin-right: 0.5em;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+}
+
+nav {
+    flex: 0, 100px;
+    background: #212121;
+    padding: 0.5em;
+}
+
+menu {
+    padding: 0;
+    margin: 0.5em;
+    justify-content: start;
+    align-items: center;
+}
+
+li {
+    list-style: circle;
+}
+
+.bulk {
+    flex: 1;
+    padding: 2em;
+    display: grid;
+    justify-self: center;
+    align-self: center;
+    grid-auto-rows: 100px;
+    grid-gap: 0em;
+    justify-content: center;
+    align-items: start;
+}
+
+.bulk > * {
+    margin: 0.5em;
+    display: flex;
+}
+
+@media (orientation: landscape) {
+    #wrapper {
+        display: flex;
+    }
+    #wrapper > * {
+        flex: 1;
+    }
+  }
+
+@media (orientation: portrait) {
+    #wrapper {
+        display: contents;
+
+    }
+}
+
+.text1 {
+    margin-right: 0.5em;
+}
+
+.tooltip {
+    filter: invert();
+}
+
+select {
+    color: black;
+}
+
+footer {
+    flex: 0, 30px;
+    background: linear-gradient(to right, #ffC814, #FFDE14);;
+    padding: 1em;
+    border-top: solid black 2px;
+}
+
+footer > * {
+    padding: 0.25em;
+}

@@ -3,13 +3,20 @@
     <head>
         <meta charset="UTF-8" />
         <title>TacoTalk HTML Settings</title>
+        <link rel="stylesheet" href="settings.css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
     </head>
     <body>
         <header>
             <h1 class="title" style="display:inline">Taco Talk</h1> <img src="taco.png" alt="TacoTalk logo" width="50" style="display:inline">
             <hr>
-            <h2 class="pagename">Settings</h2>
+        </header>
+        <hr>
+        <!--Change Settings-->
+        <main>
             <nav class="sidebar">
+                <h2 class="pagename">Settings</h2>
+                <h3>Username</h3>
                 <menu>
                   <li><a href="browse.html">Browse</a></li>
                   <li><a href="post.html">Post</a></li>
@@ -17,42 +24,47 @@
                   <li><a href="index.html">Login</a></li>
                 </menu>
             </nav>
-        </header>
-        <hr>
-        <!--Change Settings-->
-        <main>
-            <h3>Username</h3>
             <!--These will be stored persistently-->
-            <label class="text1">Access Day: </label>
-            <select>
-                <option>Sunday</option>
-                <option>Monday</option>
-                <option selected>Tuesday</option>
-                <option>Wednesday</option>
-                <option>Thursday</option>
-                <option>Friday</option>
-                <option>Saturday</option>
-            </select>
-            <img src="tooltip.png" width="20" title="Changes which day you will be able to access the site">
-            <div></div>
-            <label class="text1">Theme: </label>
-            <select>
-                <option>Light</option>
-                <option selected>Dark</option>
-            </select>
-            <img src="tooltip.png" width="20" title="Changes the site color theme">
-            <div></div>
-            <legend class="text1">Receive Notifications?</legend>
-            <label class="text1">Yes</label>
-            <input type="radio" name="notif"/>
-            <label class="text1">No</label>
-            <input type="radio" name="notif" checked/>
-            <img src="tooltip.png" width="20" title="Changes whether or not you will receive notifications about people liking your posts. 
-            You will only receive notifications on your access day">
+            <div class="bulk">
+                <div>
+                    <label class="text1">Access Day: </label>
+                    <select>
+                        <option>Sunday</option>
+                        <option>Monday</option>
+                        <option selected>Tuesday</option>
+                        <option>Wednesday</option>
+                        <option>Thursday</option>
+                        <option>Friday</option>
+                        <option>Saturday</option>
+                    </select>
+                    <img src="tooltip.png" class="tooltip" width="20" title="Changes which day you will be able to access the site">
+                </div>
+                <div>
+                    <label class="text1">Theme: </label>
+                    <select>
+                        <option>Light</option>
+                        <option selected>Dark</option>
+                    </select>
+                    <img src="tooltip.png" class="tooltip" width="20" title="Changes the site color theme">
+                </div>
+                <div id="wrapper">
+                    <div>
+                        <legend class="text1">Receive Notifications?</legend>
+                    </div>
+                    <div>
+                        <label class="text1">Yes</label>
+                        <input type="radio" name="notif"/>
+                        <label class="text1">No</label>
+                        <input type="radio" name="notif" checked/>
+                        <img src="tooltip.png" class="tooltip" width="20" title="Changes whether or not you will receive notifications about people liking your posts. 
+                        You will only receive notifications on your access day">
+                    </div>
+                </div>
+            </div>
         </main>
         <hr>
         <footer>
-            <p class="text2">Creator: Matthew Medford</p>
+            <label class="text2">Creator: Matthew Medford</label>
             <a href=https://github.com/slarmoo/Startup/tree/main>Github</a>
         </footer>
     </body>
