@@ -38,3 +38,14 @@ For this deliverable I built out the structure of my application using HTML.
 + Login - Input box and submit button for login along with a separate sign up page. 
 + Database - Username, password, and associated settings choices will be stored in the database along with posts people have made.
 + WebSocket - Posts that people browse will be updated in real time. 
+
+### CSS deliverable
+
+For this deliverable I properly styled the application into its final appearance.
+
++ Header, footer, and main content body styled with flex
++ Navigation elements - 
++ Responsive to window resizing - My website looks good for most sizes, but for really thin screens it starts to fall apart
++ Application elements - The website has good contrast and whitespace
++ Application text content - The fonts are consistent
++ Application images - Has images that fit properly into the website. 
