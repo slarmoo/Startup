@@ -41,6 +41,7 @@ nav {
     flex: 0, 100px;
     background: #212121;
     padding: 0.5em;
+    border-right: solid black 2px;
 }
 
 menu {
@@ -90,17 +91,6 @@ textarea {
 }
   
 .bulk {
-    /*flex: 10;
-    padding: 2em;
-    display: grid;
-    justify-self: center;
-    align-self: center;
-    grid-auto-rows: 30vh;
-    grid-gap: 1em;
-    justify-content: center;
-    align-items: start;
-    grid-template-rows: 30vh;*/
-
     height: 100%;
     display: grid;
     grid-auto-rows: 300px;

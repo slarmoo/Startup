@@ -41,6 +41,7 @@ nav {
     flex: 0, 100px;
     background: #212121;
     padding: 0.5em;
+    border-right: solid black 2px;
 }
 
 menu {
@@ -64,6 +65,9 @@ li {
     grid-gap: 0em;
     justify-content: center;
     align-items: start;
+    background-color: #212121;
+    border: solid black 5px;
+    margin:2em;
 }
 
 .bulk > * {

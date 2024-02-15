@@ -41,6 +41,7 @@ nav {
     flex: 0, 100px;
     background: #212121;
     padding: 0.5em;
+    border-right: solid black 2px;
 }
 
 menu {
@@ -60,6 +61,9 @@ li {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: #212121;
+    border: solid black 5px;
+    margin:2em;
 }
 
 .bulk > * {
@@ -73,6 +77,8 @@ li {
 
 textarea {
     color: black;
+    width: 20vw;
+    height: 20vh;
 }
 
 a:hover {
