@@ -95,8 +95,12 @@ li {
     filter: invert();
 }
 
-select {
+select, option {
     color: black;
+}
+
+a:hover {
+    color: #0e8e12;
 }
 
 footer {

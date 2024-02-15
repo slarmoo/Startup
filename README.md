@@ -43,9 +43,9 @@ For this deliverable I built out the structure of my application using HTML.
 
 For this deliverable I properly styled the application into its final appearance.
 
-+ Header, footer, and main content body styled with flex
-+ Navigation elements - 
-+ Responsive to window resizing - My website looks good for most sizes, but for really thin screens it starts to fall apart
-+ Application elements - The website has good contrast and whitespace
-+ Application text content - The fonts are consistent
++ Header, footer, and main content body styled with flex.
++ Navigation elements - Turn green when hovered over, can get to every website. Navigation displayed prominently in the sidebar. 
++ Responsive to window resizing - My website looks good for most sizes, but for really thin screens it starts to fall apart.
++ Application elements - The website has good contrast and whitespace.
++ Application text content - The fonts are consistent.
 + Application images - Has images that fit properly into the website. 

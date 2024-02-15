@@ -134,8 +134,8 @@ textarea {
     margin-right: 0.5em;
 }
 
-input {
-    color: black;
+a:hover {
+    color: #0e8e12;
 }
 
 .postText {
@@ -155,7 +155,6 @@ input {
 }
 
 .like {
-    display: block;
     align-items: center;
     align-self: center;
     justify-content: center;

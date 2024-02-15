@@ -113,6 +113,10 @@ button {
     padding-right: 15px;
 }
 
+a:hover {
+    color: #0e8e12;
+}
+
 footer {
     flex: 0, 30px;
     background: linear-gradient(to right, #ffC814, #FFDE14);
