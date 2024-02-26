@@ -19,25 +19,26 @@
             </nav>
             <div class="bulk">
                 <div class="card">
-                    <label class="text1">Username: </label><input required />
+                    <label class="text1">Username: </label><input required id="username"/>
                 </div>
                 <div class="card">
-                    <label class="text1">Date of Birth: </label><input type="date" required />
+                    <label class="text1">Date of Birth: </label><input type="date" required id="birth"/>
                 </div>
                 <div class="card">
-                    <label class="text1">Password: </label><input type="password" required />
+                    <label class="text1">Password: </label><input type="password" required id="password"/>
                 </div>
                 <div class="card">
-                    <label class="text1">Comfirm Password: </label><input type="password" required />
+                    <label class="text1">Comfirm Password: </label><input type="password" required id="comfirm"/>
                 </div>
                 <div id="wrapper">
                     <div class="card" id="signup">
-                        <button>Sign Up</button> 
+                        <button onclick="create()">Sign Up</button> 
                     </div>
                     <div class="card" id="signin">
                         <a href="index.html">Already have an account?</a>
                     </div>
                 </wrapper>
+                <p id="feedback"></p>
             </div>
         </main>
         <hr>
