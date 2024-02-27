@@ -22,6 +22,7 @@ function readTheme() {
     tooltipEl = document.querySelectorAll(".tooltip");
     links = document.querySelectorAll(".link");
     links2 = document.querySelectorAll(".link2");
+    options = document.getElementsByTagName("option");
     if(localStorage.getItem("theme") === "Light") {
         for(let i = 0; i < text1.length; i++) {
             text1[i].style.color = "black";
@@ -34,6 +35,9 @@ function readTheme() {
             links[i].classList.add("link2");
             links[i].classList.remove("link");
         }
+        // for(let i = 0; i < options; i++) {
+        //     options[i].removeAttribute("selected");
+        // }
         navEl.style.background = "#ff5346";
         bulkEl.style.background = "#ff5346";
         navEl.style.border = "#550000 solid 2px";

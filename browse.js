@@ -33,3 +33,42 @@ function checkDay() {
         mainEl.style.height = "80%";  
     }
 }
+readTheme();
+function readTheme() {
+    text1 = document.querySelectorAll(".text1");
+    navEl = document.querySelector(".sidebar");
+    cardEl = document.querySelectorAll(".card");
+    links = document.querySelectorAll(".link");
+    links2 = document.querySelectorAll(".link2");
+    if(localStorage.getItem("theme") === "Light") {
+        for(let i = 0; i < text1.length; i++) {
+            text1[i].style.color = "black";
+        }
+        let l = links.length;
+        for(let i = 0; i < l; i++) {
+            links[i].classList.add("link2");
+            links[i].classList.remove("link");
+        }
+        for(let i = 0; i < cardEl.length; i++) {
+            cardEl[i].style.border = "#550000 solid 5px";
+            cardEl[i].style.background = "#ff5346";
+        }
+        navEl.style.background = "#ff5346";
+        navEl.style.border = "#550000 solid 2px";
+    } else {
+        for(let i = 0; i < text1.length; i++) {
+            text1[i].style.color = "white";
+        }
+        let l = links2.length;
+        for(let i = 0; i < links2.length; i++) {
+            links2[i].classList.add("link");
+            links2[i].classList.remove("link2");
+        } 
+        for(let i = 0; i < cardEl.length; i++) {
+            cardEl[i].style.border = "#000000 solid 5px";
+            cardEl[i].style.background = "#212121";
+        }
+        navEl.style.background = "#212121";
+        navEl.style.border = "#000000 solid 2px";
+    }
+}
