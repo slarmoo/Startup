@@ -20,5 +20,3 @@ function create() {
         document.querySelector("#feedback").innerHTML = "Make sure you enter a password";
     }
 }
-    
-  
