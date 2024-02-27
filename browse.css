@@ -124,9 +124,22 @@ textarea {
     margin-right: 0.5em;
 }
 
-a:hover {
+a.link:hover {
     color: #0e8e12;
 }
+
+a.link2:hover {
+    color: #0e8e12;
+}
+
+a.link {
+    color: white;
+}
+
+a.link2 {
+    color: black;
+}
+
 
 .postText {
     display: block;
