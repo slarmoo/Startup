@@ -27,8 +27,13 @@ function checkDay() {
         mainEl.style.justifySelf = "center";
         mainEl.style.alignSelf = "center";
         mainEl.style.justifyContent = "center";
-        mainEl.style.backgroundColor = "#212121";
-        mainEl.style.border = "solid black 5px";
+        if(localStorage.getItem("theme") === "Light") {
+            mainEl.style.border = "#883300 solid 5px";
+            mainEl.style.background = "#fC8f14";
+        } else {
+            mainEl.style.backgroundColor = "#212121";
+            mainEl.style.border = "solid black 5px";
+        }
         mainEl.style.margin = "2em";
         mainEl.style.height = "80%";  
     }
@@ -50,11 +55,11 @@ function readTheme() {
             links[i].classList.remove("link");
         }
         for(let i = 0; i < cardEl.length; i++) {
-            cardEl[i].style.border = "#550000 solid 5px";
-            cardEl[i].style.background = "#ff5346";
+            cardEl[i].style.border = "#883300 solid 5px";
+            cardEl[i].style.background = "#fC8f14";
         }
-        navEl.style.background = "#ff5346";
-        navEl.style.border = "#550000 solid 2px";
+        navEl.style.background = "#fC8f14";
+        navEl.style.border = "#883300 solid 2px";
     } else {
         for(let i = 0; i < text1.length; i++) {
             text1[i].style.color = "white";

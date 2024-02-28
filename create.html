@@ -8,14 +8,14 @@
     </head>
     <body>
         <header>
-            <h1 class="title" style="display:inline">Taco Talk</h1> <img src="taco.png" alt="TacoTalk logo" width="50" style="display:inline">
+            <h1 id="title" class="text1" style="display:inline">Taco Talk</h1> <img src="taco.png" alt="TacoTalk logo" width="50" style="display:inline">
             <hr>
         </header>
         <!--Sign Up-->
         <hr>
         <main>
-            <nav>
-                <h2 class="pagename">Create an Account</h2>
+            <nav class="sidebar">
+                <h2 class="text1">Create an Account</h2>
             </nav>
             <div class="bulk">
                 <div class="card">
@@ -32,19 +32,21 @@
                 </div>
                 <div id="wrapper">
                     <div class="card" id="signup">
-                        <button onclick="create()">Sign Up</button> 
+                        <button onclick="create()" class="text1" id="button">Sign Up</button> 
                     </div>
                     <div class="card" id="signin">
-                        <a href="index.html">Already have an account?</a>
+                        <a href="index.html" class="link">Already have an account?</a>
                     </div>
                 </wrapper>
-                <p id="feedback"></p>
+                <div class="card">
+                    <p id="feedback" class="text1"></p>
+                </div>
             </div>
         </main>
         <hr>
         <footer>
-            <label class="text2">Creator: Matthew Medford</label>
-            <a href=https://github.com/slarmoo/Startup/tree/main id="github">Github</a>
+            <label class="text1">Creator: Matthew Medford</label>
+            <a href=https://github.com/slarmoo/Startup/tree/main id="github" class="link">Github</a>
         </footer>
         <script src="create.js"></script>
     </body>

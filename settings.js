@@ -38,10 +38,10 @@ function readTheme() {
         // for(let i = 0; i < options; i++) {
         //     options[i].removeAttribute("selected");
         // }
-        navEl.style.background = "#ff5346";
-        bulkEl.style.background = "#ff5346";
-        navEl.style.border = "#550000 solid 2px";
-        bulkEl.style.border = "#550000 solid 5px";
+        navEl.style.background = "#fC8f14";
+        bulkEl.style.background = "#fC8f14";
+        navEl.style.border = "#883300 solid 2px";
+        bulkEl.style.border = "#883300 solid 5px";
     } else {
         for(let i = 0; i < text1.length; i++) {
             text1[i].style.color = "white";

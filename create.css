@@ -28,7 +28,7 @@ header {
     border-bottom: solid black 2px;
 }
 
-.title {
+#title {
     margin-right: 0.5em;
 }
 
@@ -108,7 +108,7 @@ input {
     color: black;
 }
 
-button {
+#button {
     background: #fC8f14;
     margin-right: 6em;
     border: solid black 2px;
@@ -117,8 +117,20 @@ button {
     padding-right: 15px;
 }
 
-a:hover {
+a.link:hover {
     color: #0e8e12;
+}
+
+a.link2:hover {
+    color: #0e8e12;
+}
+
+a.link {
+    color: white;
+}
+
+a.link2 {
+    color: black;
 }
 
 footer {
