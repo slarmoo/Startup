@@ -11,6 +11,16 @@ function uppercase(word) {
 }
 checkDay();
 readTheme();
+function savePost() {
+    postTextEl = document.querySelector("#postText");
+    postImgEl = document.querySelector("#postImg");
+    if(postTextEl.value != "" && postImgEl.value != "") {
+        localStorage.setItem("postText", postTextEl.value);
+        localStorage.setItem("postImg", postImgEl.value);
+        postTextEl.value = "";
+        postImgEl.value = "";
+    }
+}
 function checkDay() {
     let d = new Date();
     let day = d.getDay();
@@ -31,6 +41,7 @@ function readTheme() {
     bulkEl = document.querySelector(".bulk");
     links = document.querySelectorAll(".link");
     links2 = document.querySelectorAll(".link2");
+    buttonEl = document.querySelector("#button");
     if(localStorage.getItem("theme") === "Light") {
         for(let i = 0; i < text1.length; i++) {
             text1[i].style.color = "black";
@@ -47,6 +58,7 @@ function readTheme() {
         bulkEl.style.background = "#fC8f14";
         navEl.style.border = "#883300 solid 2px";
         bulkEl.style.border = "#883300 solid 5px";
+        buttonEl.style.background = "#eeeeee";
     } else {
         for(let i = 0; i < text1.length; i++) {
             text1[i].style.color = "white";
@@ -60,5 +72,6 @@ function readTheme() {
         bulkEl.style.background = "#212121";
         navEl.style.border = "#000000 solid 2px";
         bulkEl.style.border = "#000000 solid 5px";
+        buttonEl.style.background = "#fC8f14";
     }
 }
