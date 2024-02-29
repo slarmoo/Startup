@@ -9,6 +9,66 @@ function uppercase(word) {
     }
     return newWord;
 }
+addPosts();
+function addPosts() {
+    let posts = JSON.parse(localStorage.getItem("posts"));
+    let bulk = document.querySelector(".bulk");
+    for(let i=0; i<posts.length; i++) {
+        let objj = {};
+        objj["div" + i] = document.createElement("div");
+        bulk.appendChild(objj["div" + i]);
+        bulk.lastChild.classList.add("card");
+    }
+    cards = document.querySelectorAll(".card");
+    for(let i=0; i<cards.length; i++) {
+        let obj = {};
+        obj["div1" + i] = document.createElement("div");
+        obj["div2" + i] = document.createElement("div");
+        obj["div3" + i] = document.createElement("div");
+        const p = document.createElement("p");
+        const img = document.createElement("img");
+        const label = document.createElement("label");
+        const input = document.createElement("input");
+        let postText = posts[i][0];
+        let postImg = posts[i][1];
+        cards[i].appendChild(obj["div1" + i]);
+            let currentDiv = cards[i].lastChild;
+            currentDiv.appendChild(p);
+                currentDiv.lastChild.classList.add("postText");
+                currentDiv.lastChild.classList.add("text1");
+                currentDiv.lastChild.innerHTML = postText;
+        cards[i].appendChild(obj["div2" + i]);
+            currentDiv = cards[i].lastChild;
+            currentDiv.appendChild(img);
+                currentDiv.lastChild.id = "postImage" + i;
+                currentDiv.lastChild.src = postImg;
+                currentDiv.lastChild.alt = "";
+                currentDiv.lastChild.width = "150";
+        cards[i].appendChild(obj["div3" + i]);
+            currentDiv = cards[i].lastChild;
+            currentDiv.appendChild(label);
+                currentDiv.lastChild.classList.add("like");
+                currentDiv.lastChild.classList.add("text1");
+                currentDiv.lastChild.innerHTML = "Like";
+                currentDiv.lastChild.src = postImg;
+            currentDiv.appendChild(input);
+                currentDiv.lastChild.type = "checkbox";
+                currentDiv.lastChild.name = "like";
+                currentDiv.lastChild.classList.add("likeCheck");         
+        let reader  = new FileReader();
+        let sadness =  document.querySelector("#postImage" + i);
+        reader.onloadend = function () {
+           sadness.src = reader.result;
+        }
+        
+        if (postImg) {
+            console.log(postImg);
+            reader.readAsDataURL(postImg);
+        } else {
+            sadness.src = "";
+        }
+    }
+}
 checkDay();
 function checkDay() {
     let d = new Date();

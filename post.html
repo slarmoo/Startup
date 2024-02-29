@@ -28,8 +28,11 @@
             <div class="bulk text1">
             <textarea id="postText"></textarea>
             <div>
-                <input id="postImg" type="file" accept=".jpeg,.png,.tiff,.pdf,.jpg" class="text1"/>
+                <input id="postImg" type="file" accept=".jpeg,.png,.tiff,.pdf,.jpg" class="text1" onclick="preview()"/>
                 <button onclick="savePost()" class="text1" id="button">Post</button>
+            </div>
+            <div>
+                <img src="" width="150" alt="your image here!" id="preview">
             </div>
         </div>
         </main>

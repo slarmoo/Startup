@@ -14,12 +14,32 @@ readTheme();
 function savePost() {
     postTextEl = document.querySelector("#postText");
     postImgEl = document.querySelector("#postImg");
+    console.log(postImgEl.value);
     if(postTextEl.value != "" && postImgEl.value != "") {
-        localStorage.setItem("postText", postTextEl.value);
-        localStorage.setItem("postImg", postImgEl.value);
+        let delta = [];
+        posts = JSON.parse(localStorage.getItem("posts"));
+        if(posts) {
+            delta = delta.concat(posts);
+        }
+        delta.push([postTextEl.value, postImgEl.value]);
+        localStorage.setItem("posts", JSON.stringify(delta));
         postTextEl.value = "";
         postImgEl.value = "";
     }
+}
+function preview() {
+    let preview = document.querySelector("#preview");
+    let file = document.querySelector("#postImg").files[0];
+    let reader  = new FileReader();
+    reader.onloadend = function () {
+        preview.src = reader.result;
+      }
+    
+      if (file) {
+        reader.readAsDataURL(file);
+      } else {
+        preview.src = "";
+      }
 }
 function checkDay() {
     let d = new Date();
