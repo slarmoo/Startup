@@ -9,9 +9,23 @@ function uppercase(word) {
     }
     return newWord;
 }
+fakePost()
+function fakePost() {
+    post = Math.random();
+    img = "fake" + Math.floor(Math.random()*2) + ".jpg";
+    console.log(img);
+    let delta = [];
+    posts = JSON.parse(localStorage.getItem("posts"));
+    if(posts) {
+        delta = delta.concat(posts);
+    }
+    delta.push([post, img]);
+    localStorage.setItem("posts", JSON.stringify(delta));
+}
 addPosts();
 function addPosts() {
     let posts = JSON.parse(localStorage.getItem("posts"));
+    console.log(posts);
     let bulk = document.querySelector(".bulk");
     for(let i=0; i<posts.length; i++) {
         let objj = {};
@@ -55,19 +69,19 @@ function addPosts() {
                 currentDiv.lastChild.type = "checkbox";
                 currentDiv.lastChild.name = "like";
                 currentDiv.lastChild.classList.add("likeCheck");         
-        let reader  = new FileReader();
-        let sadness =  document.querySelector("#postImage" + i);
-        reader.onloadend = function () {
-           sadness.src = reader.result;
-        }
+    //     let reader  = new FileReader();
+    //     let sadness =  document.querySelector("#postImage" + i);
+    //     reader.onloadend = function () {
+    //        sadness.src = reader.result;
+    //     }
         
-        if (postImg) {
-            console.log(postImg);
-            reader.readAsDataURL(postImg);
-        } else {
-            sadness.src = "";
-        }
-    }
+    //     if (postImg) {
+    //         console.log(postImg);
+    //         reader.readAsDataURL(postImg);
+    //     } else {
+    //         sadness.src = "";
+    //     }
+     }
 }
 checkDay();
 function checkDay() {

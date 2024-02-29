@@ -49,3 +49,14 @@ For this deliverable I properly styled the application into its final appearance
 + Application elements - The website has good contrast and whitespace.
 + Application text content - The fonts are consistent.
 + Application images - Has images that fit properly into the website. 
+
+### Javascript Deliverable
+
+For this deliverable I added some base functionality for my webpage. 
+
++ login - When you enter a username and password, it sends you to the browse page. 
++ database - Displays the posts that you input. Currently this is stored and retrieved from local storage, but it will be replaced with the database data later.
++ WebSocket - Made randomly generated posts. This will be replaced with WebSocket posts later.
++ application logic - The settings page changes the day that you can access the website and the look of the entire website.
+
+Known issues: Images do not currently work with the database. 
