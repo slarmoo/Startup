@@ -11,21 +11,23 @@ function uppercase(word) {
 }
 fakePost()
 function fakePost() {
-    post = Math.random();
-    img = "fake" + Math.floor(Math.random()*2) + ".jpg";
-    console.log(img);
-    let delta = [];
-    posts = JSON.parse(localStorage.getItem("posts"));
-    if(posts) {
-        delta = delta.concat(posts);
-    }
-    delta.push([post, img]);
-    localStorage.setItem("posts", JSON.stringify(delta));
+    fetch("/api/posts").then((data) => data.json()).then((data)=>{
+        console.log(data);
+        post = data[0];
+        img = data[1];
+        console.log(img);
+        let delta = [];
+        posts = JSON.parse(localStorage.getItem("posts"));
+        if(posts) {
+            delta = delta.concat(posts);
+        }
+        delta.push([post, img]);
+        localStorage.setItem("posts", JSON.stringify(delta));
+    });
 }
 addPosts();
 function addPosts() {
     let posts = JSON.parse(localStorage.getItem("posts"));
-    console.log(posts);
     let bulk = document.querySelector(".bulk");
     for(let i=0; i<posts.length; i++) {
         let objj = {};

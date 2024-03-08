@@ -12,6 +12,17 @@ app.use(express.static('public'));
 
 // Router for service endpoints
 var apiRouter = express.Router();
+
+apiRouter.get("/posts", (req, res)=>{
+    // [
+    //     ["ooga", "img"],
+    //     ["bppgq", "/taco.png"]
+    // ]
+    post = Math.random()
+    img = "fake" + Math.floor(Math.random()*2+1) + ".jpg"
+    res.send([post, img]);
+});
+
 app.use(`/api`, apiRouter);
 
 app.listen(4000)
