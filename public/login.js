@@ -4,6 +4,11 @@ function login() {
     const passEl = document.querySelector("#password");
     if(passEl.value && passEl.value != "") {
         localStorage.setItem("userName", nameEl.value);
+        const response = fetch('/api/user', {
+            method: 'POST',
+            headers: {'content-type': 'application/json'},
+            body: JSON.stringify([nameEl.value, passEl.value]),
+        });
         window.location.href = "browse.html";
       }
     else {

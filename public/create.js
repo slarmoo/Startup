@@ -10,6 +10,11 @@ function create() {
             if(parsedDate[0] <= 2011) {
                 localStorage.setItem("userName", nameEl.value);
                 window.location.href = "browse.html";
+                const response = fetch('/api/user', {
+                    method: 'POST',
+                    headers: {'content-type': 'application/json'},
+                    body: JSON.stringify([nameEl.value, passEl.value]),
+                });
             } else {
                 document.querySelector("#feedback").innerHTML = "You aren't old enough";
             }
