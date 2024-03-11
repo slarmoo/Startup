@@ -60,3 +60,13 @@ For this deliverable I added some base functionality for my webpage.
 + application logic - The settings page changes the day that you can access the website and the look of the entire website.
 
 Known issues: Images do not currently work with the database. 
+
+### Service Deliverable
+
+For this deliverable I added frontend and backend endpoints to send and receive posts from users.
+
+Node.js/Express HTTP service - done!
+Static middleware for frontend - done!
+Calls to third party endpoints - Calls NASA's image of the day API and uses them to generate fake posts. 
+Backend service endpoints - Placeholders for login that stores the current user on the server. Endpoints for posts.
+Frontend calls service endpoints - I did this using the fetch function.
