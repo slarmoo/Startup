@@ -14,14 +14,15 @@ function fakePost() {
     fetch("/api/posts").then((data) => data.json()).then((data)=>{
         console.log(data);
         post = data[0];
-        img = data[1];
+        img = imageAPI();
         console.log(img);
         let delta = [];
         posts = JSON.parse(localStorage.getItem("posts"));
         if(posts) {
             delta = delta.concat(posts);
         }
-        delta.push([post, img]);
+        console.log(["welp: ",post, imageAPI()]);
+        delta.push([post, imageAPI()]);
         localStorage.setItem("posts", JSON.stringify(delta));
     });
 }
@@ -47,6 +48,7 @@ function addPosts() {
         const input = document.createElement("input");
         let postText = posts[i][0];
         let postImg = posts[i][1];
+        console.log([postText, postImg]);
         cards[i].appendChild(obj["div1" + i]);
             let currentDiv = cards[i].lastChild;
             currentDiv.appendChild(p);
@@ -152,4 +154,16 @@ function readTheme() {
         navEl.style.background = "#212121";
         navEl.style.border = "#000000 solid 2px";
     }
+}
+
+function imageAPI() {
+    const apiKey = 'b2AeAeLD7dCCPd68hRdOzTrusVvgKQQu9k4mC76F';
+
+    fetch(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}`)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data.url);
+            return data.url;
+        });
+    
 }
