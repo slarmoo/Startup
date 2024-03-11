@@ -14,10 +14,6 @@ app.use(express.static('public'));
 var apiRouter = express.Router();
 
 apiRouter.get("/posts", (req, res)=>{
-    // [
-    //     ["ooga", "img"],
-    //     ["bppgq", "/taco.png"]
-    // ]
     post = Math.random()
     img = "fake" + Math.floor(Math.random()*2+1) + ".jpg"
     res.send([post, img]);

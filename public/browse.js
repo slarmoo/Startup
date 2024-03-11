@@ -12,17 +12,18 @@ function uppercase(word) {
 fakePost()
 function fakePost() {
     fetch("/api/posts").then((data) => data.json()).then((data)=>{
-        console.log(data);
+        console.log(["data", data]);
         post = data[0];
-        img = imageAPI();
-        console.log(img);
+        imageAPI();
+        img = localStorage.getItem("image")
+        console.log(["image", img]);
         let delta = [];
         posts = JSON.parse(localStorage.getItem("posts"));
         if(posts) {
             delta = delta.concat(posts);
         }
-        console.log(["welp: ",post, imageAPI()]);
-        delta.push([post, imageAPI()]);
+        console.log(["welp: ",post, img]);
+        delta.push([post, img]);
         localStorage.setItem("posts", JSON.stringify(delta));
     });
 }
@@ -48,7 +49,7 @@ function addPosts() {
         const input = document.createElement("input");
         let postText = posts[i][0];
         let postImg = posts[i][1];
-        console.log([postText, postImg]);
+        console.log(["in cards", postText, postImg]);
         cards[i].appendChild(obj["div1" + i]);
             let currentDiv = cards[i].lastChild;
             currentDiv.appendChild(p);
@@ -158,12 +159,12 @@ function readTheme() {
 
 function imageAPI() {
     const apiKey = 'b2AeAeLD7dCCPd68hRdOzTrusVvgKQQu9k4mC76F';
-
     fetch(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}`)
         .then(response => response.json())
         .then(data => {
-            console.log(data.url);
-            return data.url;
+            localStorage.setItem("image", data.url)
         });
-    
+    // let y = x.then(response => response.json());
+    // let z = y.then(data => data.url);
+    // console.log(["x=", x, "y=", y, "z=", z]);
 }
