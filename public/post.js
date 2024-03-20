@@ -1,4 +1,5 @@
 //post
+
 let userName = localStorage.getItem("userName");
 userName = uppercase(userName);
 document.querySelector("#userName").innerHTML = userName;
@@ -11,20 +12,47 @@ function uppercase(word) {
 }
 checkDay();
 readTheme();
-function savePost() {
+async function savePost() {
     postTextEl = document.querySelector("#postText");
     postImgEl = document.querySelector("#postImg");
-    console.log(postImgEl.value);
-    if(postTextEl.value != "" && postImgEl.value != "") {
+    // console.log("postImg = " + postImgEl.files);
+    if(postTextEl.value != "" && postImgEl.files[0] != "") {
         let delta = [];
-        posts = JSON.parse(localStorage.getItem("posts"));
+        //posts = JSON.parse(localStorage.getItem("posts"));
+        let posts = await fetch("/api/post")
+            .then(response => response.json())
+            .then(data => {localStorage.setItem("posts", data)});
+        posts = localStorage.getItem("posts");
+        console.log(posts);
+        if(posts) {
+                delta = delta.concat(posts);
+        } else {
+            console.log("ERROR: posts not found");
+        }
+        
         if(posts) {
             delta = delta.concat(posts);
         }
-        delta.push([postTextEl.value, postImgEl.value]);
-        localStorage.setItem("posts", JSON.stringify(delta));
+
+        const reader = new FileReader();
+        let imgString;
+        reader.onload = function (e) {
+            const base64String = e.target.result;
+            console.log('Base64 Image:', base64String);
+            imgString = base64String;
+        }
+        reader.readAsDataURL(postImgEl.files[0]);
+        
+        console.log("image string = " + imgString);
+        delta.push([postTextEl.value, imgString]);
+
         postTextEl.value = "";
         postImgEl.value = "";
+        const newPost = await fetch("/api/post", {
+            method: 'POST',
+            headers: {'content-type': 'application/json'},
+            body: JSON.stringify(delta),
+        });
     }
 }
 function preview() {

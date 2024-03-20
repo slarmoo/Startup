@@ -39,7 +39,7 @@ async function mongoDB() {
     rentals.forEach((i) => console.log(i));
 }
 
-mongoDB().catch(console.error);
+//mongoDB().catch(console.error);
 
 // // The service port. In production the front-end code is statically hosted by the service on the same port.
 // const port = process.argv.length > 2 ? process.argv[2] : 4000; 
@@ -53,10 +53,35 @@ app.use(express.static('public'));
 // Router for service endpoints
 var apiRouter = express.Router();
 
-apiRouter.get("/posts", (req, res)=>{
+function generateFalse() {
     post = Math.random()
     img = "fake" + Math.floor(Math.random()*2+1) + ".jpg"
+    return [post, img];
+}
+
+apiRouter.get("/posts", (req, res)=>{
+    inf = generateFalse();
+    post = inf[0];
+    img = inf[1];
     res.send([post, img]);
+});
+
+let data;
+
+apiRouter.post("/post", (req, res)=>{
+    data = req.body;
+});
+
+apiRouter.get("/post", (req, res)=>{
+    console.log("data = "+data);
+    if(data) {
+        res.send(data);
+    } else {
+        inf = generateFalse();
+        post = inf[0];
+        img = inf[1];
+        res.send([post, img]);
+    }
 });
 
 app.use(`/api`, apiRouter);
