@@ -37,22 +37,39 @@ async function savePost() {
         const reader = new FileReader();
         let imgString;
         reader.onload = function (e) {
-            const base64String = e.target.result;
-            console.log('Base64 Image:', base64String);
-            imgString = base64String;
+                const base64String = e.target.result;
+                console.log('Base64 Image:', base64String);
+                imgString = base64String;
         }
-        reader.readAsDataURL(postImgEl.files[0]);
         
-        console.log("image string = " + imgString);
-        delta.push([postTextEl.value, imgString]);
 
-        postTextEl.value = "";
-        postImgEl.value = "";
-        const newPost = await fetch("/api/post", {
-            method: 'POST',
-            headers: {'content-type': 'application/json'},
-            body: JSON.stringify(delta),
-        });
+        function readAsDataURLAsync(file) {
+            return new Promise((resolve, reject) => {
+              reader.onload = function (e) {
+                resolve(e.target.result); // Resolve the Promise with the base64 string
+              };
+              reader.onerror = function (e) {
+                reject(e); // Reject the Promise if an error occurs
+              };
+              reader.readAsDataURL(file); // Start reading the file as a data URL
+            });
+          }
+        
+        readAsDataURLAsync(postImgEl.files[0])
+            .then(func =>  {console.log("image string = " + imgString);
+                delta.push([postTextEl.value, imgString]);
+                console.log("delta = "+delta)
+                postTextEl.value = "";
+                postImgEl.value = "";
+
+                const newPost = fetch("/api/post", {
+                    method: 'POST',
+                    headers: {'content-type': 'application/json'},
+                    body: JSON.stringify(delta),
+                });
+            });
+        
+
     }
 }
 function preview() {
