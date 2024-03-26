@@ -21,7 +21,7 @@ async function savePost() {
         //posts = JSON.parse(localStorage.getItem("posts"));
         let posts = await fetch("/api/post")
             .then(response => response.json())
-            .then(data => {localStorage.setItem("posts", data)});
+            .then(data => {localStorage.setItem("posts", JSON.stringify(data))});
         posts = localStorage.getItem("posts");
         console.log(posts);
         if(posts) {
@@ -40,23 +40,7 @@ async function savePost() {
                 const base64String = e.target.result;
                 console.log('Base64 Image:', base64String);
                 imgString = base64String;
-        }
-        
 
-        function readAsDataURLAsync(file) {
-            return new Promise((resolve, reject) => {
-              reader.onload = function (e) {
-                resolve(e.target.result); // Resolve the Promise with the base64 string
-              };
-              reader.onerror = function (e) {
-                reject(e); // Reject the Promise if an error occurs
-              };
-              reader.readAsDataURL(file); // Start reading the file as a data URL
-            });
-          }
-        
-        readAsDataURLAsync(postImgEl.files[0])
-            .then(func =>  {console.log("image string = " + imgString);
                 delta.push([postTextEl.value, imgString]);
                 console.log("delta = "+delta)
                 postTextEl.value = "";
@@ -67,8 +51,7 @@ async function savePost() {
                     headers: {'content-type': 'application/json'},
                     body: JSON.stringify(delta),
                 });
-            });
-        
+        }
 
     }
 }
@@ -78,13 +61,12 @@ function preview() {
     let reader  = new FileReader();
     reader.onloadend = function () {
         preview.src = reader.result;
-      }
-    
-      if (file) {
+    }
+    if (file) {
         reader.readAsDataURL(file);
-      } else {
+    } else {
         preview.src = "";
-      }
+    }
 }
 function checkDay() {
     let d = new Date();

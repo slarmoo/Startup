@@ -32,13 +32,14 @@ apiRouter.post("/post", (req, res)=>{
 
 apiRouter.get("/post", (req, res)=>{
     console.log("data = "+data);
+    data = DB.getPosts();
     if(data) {
         res.send(data);
     } else {
         inf = generateFalse();
         post = inf[0];
         img = inf[1];
-        res.send([post, img]);
+        res.send([[post, img]]);
     }
 });
 
