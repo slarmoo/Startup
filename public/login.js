@@ -1,15 +1,36 @@
 //login
-function login() {
+async function login() {
     const nameEl = document.querySelector("#username");
     const passEl = document.querySelector("#password");
     if(passEl.value && passEl.value != "") {
-        localStorage.setItem("userName", nameEl.value);
-        const response = fetch('/api/user', {
-            method: 'POST',
-            headers: {'content-type': 'application/json'},
-            body: JSON.stringify([nameEl.value, passEl.value]),
-        });
-        window.location.href = "browse.html";
+
+        try {
+            localStorage.setItem("userName", nameEl.value);
+            const response = await fetch('/auth/login', {
+                method: 'POST',
+                headers: {'content-type': 'application/json'},
+                body: JSON.stringify({username: nameEl.value, password: passEl.value}),
+            });
+
+            if(response.ok) {
+                const el = document.querySelector(".error");
+                if(el != null) {
+                    el.remove();
+                }
+                window.location.href = "browse.html";
+            } else {
+                throw new Error("Incorrect username or password");
+            }
+        } catch (error) {
+            console.log(error.message);
+            const el = document.querySelector(".error");
+            if(el == null) {
+                const p = document.createElement("p");
+                p.innerText = error.message;
+                p.classList.add("error");
+                document.querySelector(".bulk").appendChild(p);
+            }
+        }
       }
     else {
         document.querySelector("#welcome").innerHTML = "Make sure you enter a password";

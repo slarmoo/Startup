@@ -1,5 +1,5 @@
 //create
-function create() {
+async function create() {
     const nameEl = document.querySelector("#username");
     const passEl = document.querySelector("#password");
     const birthEl = document.querySelector("#birth");
@@ -8,13 +8,27 @@ function create() {
     if(passEl.value && passEl.value != "") {
         if(passEl.value === confirmEl.value) {
             if(parsedDate[0] <= 2011) {
-                localStorage.setItem("userName", nameEl.value);
-                window.location.href = "browse.html";
-                const response = fetch('/api/user', {
-                    method: 'POST',
-                    headers: {'content-type': 'application/json'},
-                    body: JSON.stringify([nameEl.value, passEl.value]),
-                });
+                try {
+                    const response = await fetch('/auth/create', {
+                        method: 'POST',
+                        headers: {'content-type': 'application/json'},
+                        body: JSON.stringify({username: nameEl.value, password: passEl.value}),
+                    });
+                    const el = document.querySelector(".error");
+                    if(el != null) {
+                        el.remove();
+                    }
+                    window.location.href = "browse.html";
+                } catch {
+                    console.log("Not an authorized user");
+                    const el = document.querySelector(".error");
+                    if(el != null) {
+                        const p = document.createElement("p");
+                        p.innerText = "Incorrect username or password";
+                        p.classList.add("error");
+                        document.querySelector(".bulk").appendChild(p);
+                    }
+                }
             } else {
                 document.querySelector("#feedback").innerHTML = "You aren't old enough";
             }
@@ -42,9 +56,6 @@ function readTheme() {
             links[i].classList.add("link2");
             links[i].classList.remove("link");
         }
-        // for(let i = 0; i < options; i++) {
-        //     options[i].removeAttribute("selected");
-        // }
         navEl.style.background = "#fC8f14";
         bulkEl.style.background = "#fC8f14";
         navEl.style.border = "#883300 solid 2px";

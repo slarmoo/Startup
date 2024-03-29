@@ -29,20 +29,18 @@ let data;
 
 apiRouter.post("/post", async (req, res)=>{
     data = req.body;
-    console.log("service data = ", data);
     await DB.addPost(data);
 });
 
 apiRouter.get("/post", async (req, res)=>{
     data = await DB.getPosts();
-    console.log("data = ", data);
     if(data) {
         res.send(data);
-    } else {
-        inf = generateFalse();
-        text = inf[0];
-        image = inf[1];
-        res.send({text: text, image: image});
+    // } else {
+    //     inf = generateFalse();
+    //     text = inf[0];
+    //     image = inf[1];
+    //     res.send({text: text, image: image});
     }
 });
 
@@ -51,10 +49,10 @@ const cookieParser = require('cookie-parser');
 app.use(cookieParser());
 
 app.post('/auth/create', async (req, res) => {
-    if (await DB.getUser(req.body.email)) {
+    if (await DB.getUser(req.body.username)) {
         res.status(409).send({ msg: 'Existing user' });
     } else {
-        const user = await DB.createUser(req.body.email, req.body.password);
+        const user = await DB.createUser(req.body.username, req.body.password);
 
         setAuthCookie(res, user.token);
 
@@ -73,7 +71,7 @@ app.post('/auth/create', async (req, res) => {
   }
 
   app.post('/auth/login', async (req, res) => {
-    const user = await getUser(req.body.email);
+    const user = await DB.getUser(req.body.username);
     if (user) {
       if (await bcrypt.compare(req.body.password, user.password)) {
         setAuthCookie(res, user.token);
@@ -86,9 +84,9 @@ app.post('/auth/create', async (req, res) => {
 
   app.get('/user/me', async (req, res) => {
     authToken = req.cookies['token'];
-    const user = await collection.findOne({ token: authToken });
+    const user = await DB.getToken(authToken);
     if (user) {
-      res.send({ email: user.email });
+      res.send({ username: user.username });
       return;
     }
     res.status(401).send({ msg: 'Unauthorized' });

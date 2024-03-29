@@ -40,22 +40,22 @@ async function getPosts() {
 }
 
 async function addPost(data) {
-    // const newPost = {
-    //     text: text,
-    //     image: image,
-    // };
     postCollection.insertOne(data);
 }
 
 //login
-function getUser(email) {
-    return userCollection.findOne({ email: email });
+function getUser(username) {
+    return userCollection.findOne({ username: username });
+}
+
+function getToken(authToken) {
+    return userCollection.findOne({ token: authToken });
 }
 
 async function createUser(email, password) {
     const passwordHash = await bcrypt.hash(password, 10);
     const user = {
-        email: email,
+        username: username,
         password: passwordHash,
         token: uuid.v4(),
     };
@@ -64,4 +64,4 @@ async function createUser(email, password) {
     return user;
   }
 
-module.exports = { getPosts, addPost, getUser, createUser };
+module.exports = { getPosts, addPost, getUser, createUser, getToken };

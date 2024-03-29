@@ -58,18 +58,6 @@ async function savePost() {
                 headers: {'content-type': 'application/json'},
                 body: JSON.stringify(delta),
             });
-            //const reader = new FileReader();
-
-            // reader.onload = function (e) {
-            //     console.log("here4");
-            //     console.log("e = "+e);
-            //     const base64String = e.target.result;
-            //     console.log('Base64 Image =', base64String);
-    
-            //     //removed
-            // }
-
-            // reader.readAsDataURL(imggg);
         };        
     }
 
@@ -121,11 +109,11 @@ async function preview() {
             }
         } catch {
             const el = document.querySelector(".error");
-            if(el != null) {
+            if(el == null) {
                 const p = document.createElement("p");
                 p.innerText = "File too large";
                 p.classList.add("error");
-                document.querySelector(".bulk").appendChild(p)
+                document.querySelector(".bulk").appendChild(p);
             }
         }
         console.log("imggg = "+imggg)
