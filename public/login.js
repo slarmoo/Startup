@@ -5,13 +5,11 @@ async function login() {
     if(passEl.value && passEl.value != "") {
 
         try {
-            localStorage.setItem("userName", nameEl.value);
             const response = await fetch('/auth/login', {
                 method: 'POST',
                 headers: {'content-type': 'application/json'},
                 body: JSON.stringify({username: nameEl.value, password: passEl.value}),
             });
-
             if(response.ok) {
                 const el = document.querySelector(".error");
                 if(el != null) {
@@ -24,7 +22,7 @@ async function login() {
         } catch (error) {
             console.log(error.message);
             const el = document.querySelector(".error");
-            if(el == null) {
+            if(el != null) {
                 const p = document.createElement("p");
                 p.innerText = error.message;
                 p.classList.add("error");

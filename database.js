@@ -52,7 +52,7 @@ function getToken(authToken) {
     return userCollection.findOne({ token: authToken });
 }
 
-async function createUser(email, password) {
+async function createUser(username, password) {
     const passwordHash = await bcrypt.hash(password, 10);
     const user = {
         username: username,

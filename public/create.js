@@ -14,19 +14,27 @@ async function create() {
                         headers: {'content-type': 'application/json'},
                         body: JSON.stringify({username: nameEl.value, password: passEl.value}),
                     });
-                    const el = document.querySelector(".error");
-                    if(el != null) {
-                        el.remove();
+                    if(response.ok) {
+                        const el = document.querySelector(".er");
+                        if(el != null) {
+                            el.innerHTML = "";
+                            el.remove();
+                        }
+                        window.location.href = "browse.html";
+                    } else {
+                        throw new Error("Incorrect username or password");
                     }
-                    window.location.href = "browse.html";
-                } catch {
-                    console.log("Not an authorized user");
-                    const el = document.querySelector(".error");
-                    if(el != null) {
+                } catch (error) {
+                    console.log(error.message);
+                    const el = document.querySelector(".er");
+                    if(el == null) {
+                        const div = document.createElement("div");
                         const p = document.createElement("p");
-                        p.innerText = "Incorrect username or password";
+                        div.classList.add("er");
+                        document.querySelector(".bulk").appendChild(div);
+                        p.innerText = error.message;
                         p.classList.add("error");
-                        document.querySelector(".bulk").appendChild(p);
+                        document.querySelector(".er").appendChild(p);
                     }
                 }
             } else {
