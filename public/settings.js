@@ -14,7 +14,7 @@ if(username.ok) {
 }
 const userData = await username.json();
 userName = uppercase(userData.username);
-document.querySelector("#userName").innerHTML = userName;
+document.querySelector("#userName").innerText = userName;
 function uppercase(word) {
     let newWord = word[0].toUpperCase();
     for(let i = 1; i < word.length; i++) {

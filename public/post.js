@@ -16,7 +16,7 @@ console.log(username);
 const userData = await username.json();
 console.log(userData);
 userName = uppercase(userData.username);
-document.querySelector("#userName").innerHTML = userName;
+document.querySelector("#userName").innerText = userName;
 function uppercase(word) {
     let newWord = word[0].toUpperCase();
     for(let i = 1; i < word.length; i++) {
@@ -46,7 +46,7 @@ async function savePost() {
             let month = d.getMonth();
             let date = month.toString()+day.toString();
             date = Number(date);
-            delta = {text: postTextEl.value, image: imggg, date: date};
+            delta = {text: postTextEl.value, image: imggg, date: date, user: document.querySelector("#userName").innerText};
 
             postTextEl.value = "";
             postImgEl.value = "";

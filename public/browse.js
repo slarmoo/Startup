@@ -14,7 +14,7 @@ if(username.ok) {
 }
 const userData = await username.json();
 userName = uppercase(userData.username);
-document.querySelector("#userName").innerHTML = userName;
+document.querySelector("#userName").innerText = userName;
 function uppercase(word) {
     let newWord = word[0].toUpperCase();
     for(let i = 1; i < word.length; i++) {
@@ -43,20 +43,23 @@ async function addPosts() {
             obj["div1" + i] = document.createElement("div");
             obj["div2" + i] = document.createElement("div");
             obj["div3" + i] = document.createElement("div");
+            obj["div4" + i] = document.createElement("div");
             const p = document.createElement("p");
             const img = document.createElement("img");
             const label = document.createElement("label");
             const input = document.createElement("input");
+            const label2 = document.createElement("label");
 
             let postText = posts[i]["text"];
             let postImg = posts[i]["image"];
+            let postUser = posts[i]["user"];
 
             cards[i].appendChild(obj["div1" + i]);
                 let currentDiv = cards[i].lastChild;
                 currentDiv.appendChild(p);
                     currentDiv.lastChild.classList.add("postText");
                     currentDiv.lastChild.classList.add("text1");
-                    currentDiv.lastChild.innerHTML = postText;
+                    currentDiv.lastChild.innerText = postText;
             cards[i].appendChild(obj["div2" + i]);
                 currentDiv = cards[i].lastChild;
                 currentDiv.appendChild(img);
@@ -67,10 +70,15 @@ async function addPosts() {
             cards[i].appendChild(obj["div3" + i]);
                 currentDiv = cards[i].lastChild;
                 currentDiv.appendChild(label);
+                    currentDiv.lastChild.classList.add("text1");
+                    currentDiv.lastChild.innerText = postUser;
+            cards[i].appendChild(obj["div4" + i]);
+                currentDiv = cards[i].lastChild;
+                currentDiv.appendChild(label2);
                     currentDiv.lastChild.classList.add("like");
                     currentDiv.lastChild.classList.add("text1");
-                    currentDiv.lastChild.innerHTML = "Like";
-                    currentDiv.lastChild.src = postImg;
+                    currentDiv.lastChild.innerText = "Like";
+                    // currentDiv.lastChild.src = postImg;
                 currentDiv.appendChild(input);
                     currentDiv.lastChild.type = "checkbox";
                     currentDiv.lastChild.name = "like";

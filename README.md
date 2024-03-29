@@ -78,6 +78,6 @@ For this deliverable I associate the votes with the logged in user. I stored the
 + MongoDB Atlas database created - done!
 + Stores data in MongoDB - done!
 + User registration - Creates a new account in the database.
-+ existing user - Can only use the login page if the account already exists.
++ existing user - Can login page only if the account already exists, and posts in browse displays the username of who posted it.
 + Use MongoDB to store credentials - Stores the user and their posts.
 + Restricts functionality - Cannot post or browse until logged in.
