@@ -30,7 +30,6 @@ async function getPosts() {
     let date = month.toString()+day.toString();
     date = Number(date);
     compare = date-101;
-    console.log(date, compare);
 
     const query = { date: { $gte: compare } };
     const options = {

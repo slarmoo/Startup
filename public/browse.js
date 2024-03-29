@@ -1,6 +1,19 @@
 //browse
-let userName = localStorage.getItem("userName");
-userName = uppercase(userName);
+main();
+async function main(){
+let userName;
+let username = await fetch("/user/me", {
+    method: 'GET',
+    headers: {'content-type': 'application/json',
+                "credentials": "include"},
+});
+if(username.ok) {
+    console.log("ok");
+} else {
+    window.location.href = "index.html"
+}
+const userData = await username.json();
+userName = uppercase(userData.username);
 document.querySelector("#userName").innerHTML = userName;
 function uppercase(word) {
     let newWord = word[0].toUpperCase();
@@ -9,37 +22,15 @@ function uppercase(word) {
     }
     return newWord;
 }
-// fakePost()
-// function fakePost() {
-//     fetch("/api/posts").then((data) => data.json()).then((data)=>{
-//         console.log(["data", data]);
-//         post = data[0];
-//         imageAPI();
-//         img = localStorage.getItem("image")
-//         console.log(["image", img]);
-//         let delta = [];
-//         posts = JSON.parse(localStorage.getItem("posts"));
-//         if(posts) {
-//             delta = delta.concat(posts);
-//         }
-//         console.log(["welp: ",post, img]);
-//         delta.push([post, img]);
-//         localStorage.setItem("posts", JSON.stringify(delta));
-//     });
-// }
 addPosts();
 async function addPosts() {
-    console.log("here1")
     let posts;
     try {
         const postResponse = await fetch("/api/post");
         posts = await postResponse.json();
     } finally {
         let bulk = document.querySelector(".bulk");
-        console.log("here2");
-        console.log(posts);
         for(let i=0; i<posts.length; i++) {
-            console.log("hereposts"+i)
             let objj = {};
             objj["div" + i] = document.createElement("div");
             bulk.appendChild(objj["div" + i]);
@@ -48,7 +39,6 @@ async function addPosts() {
         cards = document.querySelectorAll(".card");
 
         for(let i=0; i<cards.length; i++) {
-            console.log("herecards"+i)
             let obj = {};
             obj["div1" + i] = document.createElement("div");
             obj["div2" + i] = document.createElement("div");
@@ -61,7 +51,6 @@ async function addPosts() {
             let postText = posts[i]["text"];
             let postImg = posts[i]["image"];
 
-            console.log(["in cards", postText, postImg]);
             cards[i].appendChild(obj["div1" + i]);
                 let currentDiv = cards[i].lastChild;
                 currentDiv.appendChild(p);
@@ -72,7 +61,6 @@ async function addPosts() {
                 currentDiv = cards[i].lastChild;
                 currentDiv.appendChild(img);
                     currentDiv.lastChild.id = "postImage" + i;
-                    console.log("POSTIMG = " + postImg);
                     currentDiv.lastChild.src = postImg;
                     currentDiv.lastChild.alt = "";
                     currentDiv.lastChild.width = "150";
@@ -87,10 +75,26 @@ async function addPosts() {
                     currentDiv.lastChild.type = "checkbox";
                     currentDiv.lastChild.name = "like";
                     currentDiv.lastChild.classList.add("likeCheck");
+                    checkDay();
         }
     }
 }
+
 checkDay();
+readTheme();
+
+function imageAPI() {
+    const apiKey = 'b2AeAeLD7dCCPd68hRdOzTrusVvgKQQu9k4mC76F';
+    fetch(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}`)
+        .then(response => response.json())
+        .then(data => {
+            localStorage.setItem("image", data.url)
+        });
+    // let y = x.then(response => response.json());
+    // let z = y.then(data => data.url);
+}
+}
+
 function checkDay() {
     let d = new Date();
     let day = d.getDay();
@@ -119,7 +123,7 @@ function checkDay() {
         mainEl.style.height = "80%";  
     }
 }
-readTheme();
+
 function readTheme() {
     text1 = document.querySelectorAll(".text1");
     navEl = document.querySelector(".sidebar");
@@ -159,14 +163,10 @@ function readTheme() {
     }
 }
 
-function imageAPI() {
-    const apiKey = 'b2AeAeLD7dCCPd68hRdOzTrusVvgKQQu9k4mC76F';
-    fetch(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}`)
-        .then(response => response.json())
-        .then(data => {
-            localStorage.setItem("image", data.url)
-        });
-    // let y = x.then(response => response.json());
-    // let z = y.then(data => data.url);
-    // console.log(["x=", x, "y=", y, "z=", z]);
+async function deleteCookie() {
+    const del = await fetch("/user/expire", {
+        method: 'GET',
+        headers: {'content-type': 'application/json',
+                    "credentials": "include"},
+    });
 }

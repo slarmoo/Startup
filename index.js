@@ -36,11 +36,6 @@ apiRouter.get("/post", async (req, res)=>{
     data = await DB.getPosts();
     if(data) {
         res.send(data);
-    // } else {
-    //     inf = generateFalse();
-    //     text = inf[0];
-    //     image = inf[1];
-    //     res.send({text: text, image: image});
     }
 });
 
@@ -91,6 +86,11 @@ app.post('/auth/create', async (req, res) => {
     }
     res.status(401).send({ msg: 'Unauthorized' });
   });
+
+  app.get("/user/expire", async (req, res) => {
+    res.clearCookie('token', { path: '/' }); 
+    res.send('Cookie deleted successfully');
+  })
 
 //final
 app.use(`/api`, apiRouter);

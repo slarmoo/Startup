@@ -1,6 +1,19 @@
 //settings
-let userName = localStorage.getItem("userName");
-userName = uppercase(userName);
+main();
+async function main(){
+let userName;
+let username = await fetch("/user/me", {
+    method: 'GET',
+    headers: {'content-type': 'application/json',
+                "credentials": "include"},
+});
+if(username.ok) {
+    console.log("ok");
+} else {
+    window.location.href = "index.html"
+}
+const userData = await username.json();
+userName = uppercase(userData.username);
 document.querySelector("#userName").innerHTML = userName;
 function uppercase(word) {
     let newWord = word[0].toUpperCase();
@@ -10,6 +23,8 @@ function uppercase(word) {
     return newWord;
 }
 setTheme();
+}
+
 function setTheme() {
     let themeEl = document.querySelector("#theme");
     localStorage.setItem("theme", themeEl.value);
@@ -64,4 +79,12 @@ setDay();
 function setDay() {
     let dayEl = document.querySelector("#day");
     localStorage.setItem("day", dayEl.value);
+}
+
+async function deleteCookie() {
+    const del = await fetch("/user/expire", {
+        method: 'GET',
+        headers: {'content-type': 'application/json',
+                    "credentials": "include"},
+    });
 }

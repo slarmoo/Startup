@@ -1,7 +1,21 @@
 //post
-
-let userName = localStorage.getItem("userName");
-userName = uppercase(userName);
+main();
+async function main(){
+let userName;
+let username = await fetch("/user/me", {
+    method: 'GET',
+    headers: {'content-type': 'application/json',
+                "credentials": "include"},
+});
+if(username.ok) {
+    console.log("ok");
+} else {
+    window.location.href = "index.html"
+}
+console.log(username);
+const userData = await username.json();
+console.log(userData);
+userName = uppercase(userData.username);
 document.querySelector("#userName").innerHTML = userName;
 function uppercase(word) {
     let newWord = word[0].toUpperCase();
@@ -12,27 +26,12 @@ function uppercase(word) {
 }
 checkDay();
 readTheme();
+}
+
 async function savePost() {
     postTextEl = document.querySelector("#postText");
     postImgEl = document.querySelector("#postImg");
-    // console.log("postImg = " + postImgEl.files);
     if(postTextEl.value != "" && postImgEl.files[0] != "") {
-        //let delta = [];
-        //posts = JSON.parse(localStorage.getItem("posts"));
-        // let posts = await fetch("/api/post")
-        //     .then(response => response.json())
-        //     .then(data => {localStorage.setItem("posts", JSON.stringify(data))});
-        // posts = localStorage.getItem("posts");
-        // if(posts) {
-        //         delta = delta.concat(posts);
-        // } else {
-        //     console.log("ERROR: posts not found");
-        // }
-        
-        // if(posts) {
-        //     delta = delta.concat(posts);
-        // }
-        
         const img = new Image();
         let imggg;
         img.src = URL.createObjectURL(postImgEl.files[0]);
@@ -48,8 +47,6 @@ async function savePost() {
             let date = month.toString()+day.toString();
             date = Number(date);
             delta = {text: postTextEl.value, image: imggg, date: date};
-
-            console.log(imggg);
 
             postTextEl.value = "";
             postImgEl.value = "";
@@ -75,7 +72,6 @@ function compressImage(image, i) {
         ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
 
         const compressedDataURL = canvas.toDataURL('image/jpeg', i); 
-        console.log(i, compressedDataURL.length, compressedDataURL);
         if(compressedDataURL.length <= 9000) {
             resolve(compressedDataURL);
         } else {
@@ -118,7 +114,6 @@ async function preview() {
                 document.querySelector(".bulk").appendChild(p);
             }
         }
-        console.log("imggg = "+imggg)
         preview.src = imggg;
 
     }
@@ -176,4 +171,12 @@ function readTheme() {
         bulkEl.style.border = "#000000 solid 5px";
         buttonEl.style.background = "#fC8f14";
     }
+}
+
+async function deleteCookie() {
+    const del = await fetch("/user/expire", {
+        method: 'GET',
+        headers: {'content-type': 'application/json',
+                    "credentials": "include"},
+    });
 }
