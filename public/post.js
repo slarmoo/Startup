@@ -23,7 +23,6 @@ async function savePost() {
             .then(response => response.json())
             .then(data => {localStorage.setItem("posts", JSON.stringify(data))});
         posts = localStorage.getItem("posts");
-        console.log(posts);
         if(posts) {
                 delta = delta.concat(posts);
         } else {
@@ -33,39 +32,73 @@ async function savePost() {
         if(posts) {
             delta = delta.concat(posts);
         }
+        
+        const img = new Image();
+        let imggg;
+        img.src = URL.createObjectURL(postImgEl.files[0]);
 
-        const reader = new FileReader();
-        let imgString;
-        reader.onload = function (e) {
-                const base64String = e.target.result;
-                console.log('Base64 Image:', base64String);
-                imgString = base64String;
+        img.onload = function() {
+            imggg = compressImage(img);
+            delta.push([postTextEl.value, imggg]);
+            postTextEl.value = "";
+            postImgEl.value = "";
+            document.querySelector("#preview").src = "";
 
-                delta.push([postTextEl.value, imgString]);
-                console.log("delta = "+delta)
-                postTextEl.value = "";
-                postImgEl.value = "";
+            const newPost = fetch("/api/post", {
+                method: 'POST',
+                headers: {'content-type': 'application/json'},
+                body: JSON.stringify(delta),
+            });
+            //const reader = new FileReader();
 
-                const newPost = fetch("/api/post", {
-                    method: 'POST',
-                    headers: {'content-type': 'application/json'},
-                    body: JSON.stringify(delta),
-                });
-        }
+            // reader.onload = function (e) {
+            //     console.log("here4");
+            //     console.log("e = "+e);
+            //     const base64String = e.target.result;
+            //     console.log('Base64 Image =', base64String);
+    
+            //     //removed
+            // }
 
+            // reader.readAsDataURL(imggg);
+        };        
     }
+
 }
+function compressImage(image) {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = image.width;
+    canvas.height = image.height;
+
+    ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+    const compressedDataURL = canvas.toDataURL('image/jpeg', 0.05); 
+
+    return compressedDataURL;
+}
+
 function preview() {
     let preview = document.querySelector("#preview");
     let file = document.querySelector("#postImg").files[0];
-    let reader  = new FileReader();
-    reader.onloadend = function () {
-        preview.src = reader.result;
-    }
-    if (file) {
-        reader.readAsDataURL(file);
-    } else {
-        preview.src = "";
+    const img = new Image();
+    let imggg;
+    img.src = URL.createObjectURL(file);
+
+    img.onload = function() {
+        imggg = compressImage(img);
+        preview.src = imggg;
+
+    //     let reader  = new FileReader();
+    //     reader.onloadend = function () {
+    //         preview.src = reader.result;
+    //     }
+    //     if (imggg) {
+    //         reader.readAsDataURL(imggg);
+    //     } else {
+    //         preview.src = "";
+    //     }
     }
 }
 function checkDay() {
