@@ -65,8 +65,19 @@ Known issues: Images do not currently work with the database.
 
 For this deliverable I added frontend and backend endpoints to send and receive posts from users.
 
-Node.js/Express HTTP service - done!
-Static middleware for frontend - done!
-Calls to third party endpoints - Calls NASA's image of the day API and uses them to generate fake posts. 
-Backend service endpoints - Placeholders for login that stores the current user on the server. Endpoints for posts.
-Frontend calls service endpoints - I did this using the fetch function.
++ Node.js/Express HTTP service - done!
++ Static middleware for frontend - done!
++ Calls to third party endpoints - Calls NASA's image of the day API and uses them to generate fake posts. 
++ Backend service endpoints - Placeholders for login that stores the current user on the server. Endpoints for posts.
++ Frontend calls service endpoints - I did this using the fetch function.
+
+### Mongo/Login Deliverable
+
+For this deliverable I associate the votes with the logged in user. I stored the votes in the database.
+
++ MongoDB Atlas database created - done!
++ Stores data in MongoDB - done!
++ User registration - Creates a new account in the database.
++ existing user - Can only use the login page if the account already exists.
++ Use MongoDB to store credentials - Stores the user and their posts.
++ Restricts functionality - Cannot post or browse until logged in.

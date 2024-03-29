@@ -40,11 +40,13 @@ async function savePost() {
         img.onload = async function() {
             imggg = await compressImage(img, 0.15);
             let d = new Date();
+            let day = d.getDate();
+            if(day.length < 2) {
+                day = "0"+day.toString();
+            } 
             let month = d.getMonth();
-            if(month.length < 2) {
-                month = '0'+month;
-            }
-            let date = month+d.getDate().toString();
+            let date = month.toString()+day.toString();
+            date = Number(date);
             delta = {text: postTextEl.value, image: imggg, date: date};
 
             console.log(imggg);

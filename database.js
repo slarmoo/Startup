@@ -22,16 +22,20 @@ process.exit(1);
 //posts
 async function getPosts() {
     let d = new Date();
-            let month = d.getMonth();
-            if(month.length < 2) {
-                month = '0'+month;
-            }
-            let date = month+d.getDate().toString();
-            compare = date-100;
+    let day = d.getDate();
+    if(day.length < 2) {
+        day = "0"+day.toString();
+    } 
+    let month = d.getMonth();
+    let date = month.toString()+day.toString();
+    date = Number(date);
+    compare = date-101;
+    console.log(date, compare);
 
-    const query = { /*date: { gt: compare }*/ };
+    const query = { date: { $gte: compare } };
     const options = {
         limit: 12,
+        sort: { date: -1 }
     };
 
     const cursor = postCollection.find(query, options);
