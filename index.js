@@ -27,22 +27,22 @@ apiRouter.get("/posts", (req, res)=>{
 
 let data;
 
-apiRouter.post("/post", (req, res)=>{
+apiRouter.post("/post", async (req, res)=>{
     data = req.body;
-    console.log(data);
-    DB.addPost();
+    console.log("service data = ", data);
+    await DB.addPost(data);
 });
 
-apiRouter.get("/post", (req, res)=>{
-    data = DB.getPosts();
-    console.log("data = "+data);
+apiRouter.get("/post", async (req, res)=>{
+    data = await DB.getPosts();
+    console.log("data = ", data);
     if(data) {
         res.send(data);
     } else {
         inf = generateFalse();
-        post = inf[0];
-        img = inf[1];
-        res.send([[post, img]]);
+        text = inf[0];
+        image = inf[1];
+        res.send({text: text, image: image});
     }
 });
 

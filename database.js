@@ -21,9 +21,17 @@ process.exit(1);
 
 //posts
 async function getPosts() {
-    const query = {  };
+    let d = new Date();
+            let month = d.getMonth();
+            if(month.length < 2) {
+                month = '0'+month;
+            }
+            let date = month+d.getDate().toString();
+            compare = date-100;
+
+    const query = { /*date: { gt: compare }*/ };
     const options = {
-        limit: 10,
+        limit: 12,
     };
 
     const cursor = postCollection.find(query, options);
@@ -31,12 +39,12 @@ async function getPosts() {
     return posts;
 }
 
-async function addPost(text, image) {
-    const newPost = {
-        text: text,
-        image: image,
-    };
-    postCollection.insertOne(newPost);
+async function addPost(data) {
+    // const newPost = {
+    //     text: text,
+    //     image: image,
+    // };
+    postCollection.insertOne(data);
 }
 
 //login

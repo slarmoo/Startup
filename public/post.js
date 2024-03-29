@@ -17,29 +17,38 @@ async function savePost() {
     postImgEl = document.querySelector("#postImg");
     // console.log("postImg = " + postImgEl.files);
     if(postTextEl.value != "" && postImgEl.files[0] != "") {
-        let delta = [];
+        //let delta = [];
         //posts = JSON.parse(localStorage.getItem("posts"));
-        let posts = await fetch("/api/post")
-            .then(response => response.json())
-            .then(data => {localStorage.setItem("posts", JSON.stringify(data))});
-        posts = localStorage.getItem("posts");
-        if(posts) {
-                delta = delta.concat(posts);
-        } else {
-            console.log("ERROR: posts not found");
-        }
+        // let posts = await fetch("/api/post")
+        //     .then(response => response.json())
+        //     .then(data => {localStorage.setItem("posts", JSON.stringify(data))});
+        // posts = localStorage.getItem("posts");
+        // if(posts) {
+        //         delta = delta.concat(posts);
+        // } else {
+        //     console.log("ERROR: posts not found");
+        // }
         
-        if(posts) {
-            delta = delta.concat(posts);
-        }
+        // if(posts) {
+        //     delta = delta.concat(posts);
+        // }
         
         const img = new Image();
         let imggg;
         img.src = URL.createObjectURL(postImgEl.files[0]);
 
-        img.onload = function() {
-            imggg = compressImage(img);
-            delta.push([postTextEl.value, imggg]);
+        img.onload = async function() {
+            imggg = await compressImage(img, 0.15);
+            let d = new Date();
+            let month = d.getMonth();
+            if(month.length < 2) {
+                month = '0'+month;
+            }
+            let date = month+d.getDate().toString();
+            delta = {text: postTextEl.value, image: imggg, date: date};
+
+            console.log(imggg);
+
             postTextEl.value = "";
             postImgEl.value = "";
             document.querySelector("#preview").src = "";
@@ -65,40 +74,63 @@ async function savePost() {
     }
 
 }
-function compressImage(image) {
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
+function compressImage(image, i) {
+    return new Promise((resolve, reject) => {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
 
-    canvas.width = image.width;
-    canvas.height = image.height;
+        canvas.width = image.width;
+        canvas.height = image.height;
 
-    ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+        ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
 
-    const compressedDataURL = canvas.toDataURL('image/jpeg', 0.05); 
-
-    return compressedDataURL;
+        const compressedDataURL = canvas.toDataURL('image/jpeg', i); 
+        console.log(i, compressedDataURL.length, compressedDataURL);
+        if(compressedDataURL.length <= 9000) {
+            resolve(compressedDataURL);
+        } else {
+            const img = new Image();
+            img.src = compressedDataURL;
+            img.onload = function() {
+                if(i>0.1) {
+                    resolve(compressImage(image, i-0.05));
+                } else if(i>0.001) {
+                    resolve(compressImage(image, i/2));
+                } else {
+                    reject(new Error('Image compression failed'));
+                }
+                
+            }
+        }
+    });
 }
 
-function preview() {
+async function preview() {
     let preview = document.querySelector("#preview");
     let file = document.querySelector("#postImg").files[0];
     const img = new Image();
     let imggg;
     img.src = URL.createObjectURL(file);
 
-    img.onload = function() {
-        imggg = compressImage(img);
+    img.onload = async function() {
+        try{
+            imggg = await compressImage(img, 0.15);
+            const el = document.querySelector(".error");
+            if(el != null) {
+                el.remove();
+            }
+        } catch {
+            const el = document.querySelector(".error");
+            if(el != null) {
+                const p = document.createElement("p");
+                p.innerText = "File too large";
+                p.classList.add("error");
+                document.querySelector(".bulk").appendChild(p)
+            }
+        }
+        console.log("imggg = "+imggg)
         preview.src = imggg;
 
-    //     let reader  = new FileReader();
-    //     reader.onloadend = function () {
-    //         preview.src = reader.result;
-    //     }
-    //     if (imggg) {
-    //         reader.readAsDataURL(imggg);
-    //     } else {
-    //         preview.src = "";
-    //     }
     }
 }
 function checkDay() {
