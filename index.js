@@ -3,6 +3,8 @@ const app = express();
 const DB = require('./database.js');
 const bcrypt = require('bcrypt');
 
+const { peerProxy } = require('./peerProxy.js');
+
 // JSON body parsing using built-in middleware
 app.use(express.json());
 
@@ -95,4 +97,5 @@ app.post('/auth/create', async (req, res) => {
 //final
 app.use(`/api`, apiRouter);
 
-app.listen(4000)
+const httpService = app.listen(4000)
+peerProxy(httpService);
