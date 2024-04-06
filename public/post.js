@@ -16,9 +16,7 @@ async function main() {
     } else {
         window.location.href = "index.html"
     }
-    console.log(username);
     const userData = await username.json();
-    console.log(userData);
     userName = uppercase(userData.username);
     document.querySelector("#userName").innerText = userName;
     function uppercase(word) {

@@ -9,7 +9,6 @@ async function main(fig=false) {
             "credentials": "include"
         },
     });
-    console.log(username);
     if (username.ok) {
         console.log("ok");
     } else {

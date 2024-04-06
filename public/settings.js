@@ -112,5 +112,3 @@ function displayMsg(clss, from, msg) {
     notifEl.innerHTML = (
         `<div class="event"><span class="${clss}Event">${from}</span> ${msg}</div>`) + notifEl.innerHTML;
 }
-
-displayMsg("test", "browser", "is working hopefully");
