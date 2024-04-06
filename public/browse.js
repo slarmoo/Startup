@@ -1,106 +1,102 @@
 //browse
-main();
-async function main(){
-let userName;
-let username = await fetch("/user/me", {
-    method: 'GET',
-    headers: {'content-type': 'application/json',
-                "credentials": "include"},
-});
-if(username.ok) {
-    console.log("ok");
-} else {
-    window.location.href = "index.html"
-}
-const userData = await username.json();
-userName = uppercase(userData.username);
-document.querySelector("#userName").innerText = userName;
-function uppercase(word) {
-    let newWord = word[0].toUpperCase();
-    for(let i = 1; i < word.length; i++) {
-        newWord = newWord + word[i];
+main(true);
+async function main(fig=false) {
+    let userName;
+    let username = await fetch("/user/me", {
+        method: 'GET',
+        headers: {
+            'content-type': 'application/json',
+            "credentials": "include"
+        },
+    });
+    console.log(username);
+    if (username.ok) {
+        console.log("ok");
+    } else {
+        window.location.href = "index.html"
     }
-    return newWord;
-}
-addPosts();
-async function addPosts() {
-    let posts;
-    try {
-        const postResponse = await fetch("/api/post");
-        posts = await postResponse.json();
-    } finally {
-        let bulk = document.querySelector(".bulk");
-        for(let i=0; i<posts.length; i++) {
-            let objj = {};
-            objj["div" + i] = document.createElement("div");
-            bulk.appendChild(objj["div" + i]);
-            bulk.lastChild.classList.add("card");
+    const userData = await username.json();
+    userName = uppercase(userData.username);
+    document.querySelector("#userName").innerText = userName;
+    function uppercase(word) {
+        let newWord = word[0].toUpperCase();
+        for (let i = 1; i < word.length; i++) {
+            newWord = newWord + word[i];
         }
-        cards = document.querySelectorAll(".card");
+        return newWord;
+    }
+    addPosts();
+    async function addPosts() {
+        let posts;
+        try {
+            const postResponse = await fetch("/api/post");
+            posts = await postResponse.json();
+        } finally {
+            let bulk = document.querySelector(".bulk");
+            for (let i = 0; i < posts.length; i++) {
+                let objj = {};
+                objj["div" + i] = document.createElement("div");
+                bulk.appendChild(objj["div" + i]);
+                bulk.lastChild.classList.add("card");
+            }
+            cards = document.querySelectorAll(".card");
 
-        for(let i=0; i<cards.length; i++) {
-            let obj = {};
-            obj["div1" + i] = document.createElement("div");
-            obj["div2" + i] = document.createElement("div");
-            obj["div3" + i] = document.createElement("div");
-            obj["div4" + i] = document.createElement("div");
-            const p = document.createElement("p");
-            const img = document.createElement("img");
-            const label = document.createElement("label");
-            const input = document.createElement("input");
-            const label2 = document.createElement("label");
+            for (let i = 0; i < cards.length; i++) {
+                let obj = {};
+                obj["div1" + i] = document.createElement("div");
+                obj["div2" + i] = document.createElement("div");
+                obj["div3" + i] = document.createElement("div");
+                obj["div4" + i] = document.createElement("div");
+                const p = document.createElement("p");
+                const img = document.createElement("img");
+                const label = document.createElement("label");
+                const input = document.createElement("input");
+                const label2 = document.createElement("label");
 
-            let postText = posts[i]["text"];
-            let postImg = posts[i]["image"];
-            let postUser = posts[i]["user"];
+                let postText = posts[i]["text"];
+                let postImg = posts[i]["image"];
+                let postUser = posts[i]["user"];
 
-            cards[i].appendChild(obj["div1" + i]);
+                cards[i].appendChild(obj["div1" + i]);
                 let currentDiv = cards[i].lastChild;
                 currentDiv.appendChild(p);
-                    currentDiv.lastChild.classList.add("postText");
-                    currentDiv.lastChild.classList.add("text1");
-                    currentDiv.lastChild.innerText = postText;
-            cards[i].appendChild(obj["div2" + i]);
+                currentDiv.lastChild.classList.add("postText");
+                currentDiv.lastChild.classList.add("text1");
+                currentDiv.lastChild.innerText = postText;
+                cards[i].appendChild(obj["div2" + i]);
                 currentDiv = cards[i].lastChild;
                 currentDiv.appendChild(img);
-                    currentDiv.lastChild.id = "postImage" + i;
-                    currentDiv.lastChild.src = postImg;
-                    currentDiv.lastChild.alt = "";
-                    currentDiv.lastChild.width = "150";
-            cards[i].appendChild(obj["div3" + i]);
+                currentDiv.lastChild.id = "postImage" + i;
+                currentDiv.lastChild.src = postImg;
+                currentDiv.lastChild.alt = "";
+                currentDiv.lastChild.width = "150";
+                cards[i].appendChild(obj["div3" + i]);
                 currentDiv = cards[i].lastChild;
                 currentDiv.appendChild(label);
-                    currentDiv.lastChild.classList.add("text1");
-                    currentDiv.lastChild.innerText = postUser;
-            cards[i].appendChild(obj["div4" + i]);
+                currentDiv.lastChild.classList.add("text1");
+                currentDiv.lastChild.innerText = postUser;
+                cards[i].appendChild(obj["div4" + i]);
                 currentDiv = cards[i].lastChild;
                 currentDiv.appendChild(label2);
-                    currentDiv.lastChild.classList.add("like");
-                    currentDiv.lastChild.classList.add("text1");
-                    currentDiv.lastChild.innerText = "Like";
-                    // currentDiv.lastChild.src = postImg;
+                currentDiv.lastChild.classList.add("like");
+                currentDiv.lastChild.classList.add("text1");
+                currentDiv.lastChild.innerText = "Like";
+                // currentDiv.lastChild.src = postImg;
                 currentDiv.appendChild(input);
-                    currentDiv.lastChild.type = "checkbox";
-                    currentDiv.lastChild.name = "like";
-                    currentDiv.lastChild.classList.add("likeCheck");
-                    checkDay();
+                currentDiv.lastChild.type = "checkbox";
+                currentDiv.lastChild.name = "like";
+                currentDiv.lastChild.classList.add("likeCheck");
+                checkDay();
+            }
         }
     }
-}
 
-checkDay();
-readTheme();
+    checkDay();
+    readTheme();
+    if(fig) {
+        configureWebSocket();
+    }
 
-function imageAPI() {
-    const apiKey = 'b2AeAeLD7dCCPd68hRdOzTrusVvgKQQu9k4mC76F';
-    fetch(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}`)
-        .then(response => response.json())
-        .then(data => {
-            localStorage.setItem("image", data.url)
-        });
-    // let y = x.then(response => response.json());
-    // let z = y.then(data => data.url);
-}
 }
 
 function checkDay() {
@@ -176,5 +172,44 @@ async function deleteCookie() {
         method: 'GET',
         headers: {'content-type': 'application/json',
                     "credentials": "include"},
+    });
+}
+
+function configureWebSocket() {
+    const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+    const socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+    socket.onopen = (event) => {
+        this.displayMsg('system', 'websocket', 'connected');
+    };
+    socket.onclose = (event) => {
+        this.displayMsg('system', 'websocket', 'disconnected');
+    };
+    socket.onmessage = async (event) => {
+        const msg = JSON.parse(await event.data.text());
+        this.displayMsg('user', msg.from, "made a post!");
+        document.querySelector(".bulk").innerHTML = "";
+        delay(100);
+        main();
+    };
+}
+
+function displayMsg(clss, from, msg) {
+    const notifEl = document.querySelector('.notif');
+    notifEl.innerHTML = (
+        `<div class="event"><span class="${clss}Event">${from}</span> ${msg}</div>`) + notifEl.innerHTML;
+}
+
+function broadcastEvent(from) {
+    const event = {
+        from: from,
+    };
+    const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+    const socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+    socket.send(JSON.stringify(event));
+}
+
+function delay(milliseconds) {
+    return new Promise((resolve) => {
+        setTimeout(resolve, milliseconds);
     });
 }

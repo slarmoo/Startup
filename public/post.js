@@ -1,31 +1,36 @@
 //post
 main();
-async function main(){
 let userName;
-let username = await fetch("/user/me", {
-    method: 'GET',
-    headers: {'content-type': 'application/json',
-                "credentials": "include"},
-});
-if(username.ok) {
-    console.log("ok");
-} else {
-    window.location.href = "index.html"
-}
-console.log(username);
-const userData = await username.json();
-console.log(userData);
-userName = uppercase(userData.username);
-document.querySelector("#userName").innerText = userName;
-function uppercase(word) {
-    let newWord = word[0].toUpperCase();
-    for(let i = 1; i < word.length; i++) {
-        newWord = newWord + word[i];
+const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+const socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+async function main() {
+    let username = await fetch("/user/me", {
+        method: 'GET',
+        headers: {
+            'content-type': 'application/json',
+            "credentials": "include"
+        },
+    });
+    if (username.ok) {
+        console.log("ok");
+    } else {
+        window.location.href = "index.html"
     }
-    return newWord;
-}
-checkDay();
-readTheme();
+    console.log(username);
+    const userData = await username.json();
+    console.log(userData);
+    userName = uppercase(userData.username);
+    document.querySelector("#userName").innerText = userName;
+    function uppercase(word) {
+        let newWord = word[0].toUpperCase();
+        for (let i = 1; i < word.length; i++) {
+            newWord = newWord + word[i];
+        }
+        return newWord;
+    }
+    checkDay();
+    readTheme();
+    configureWebSocket();
 }
 
 async function savePost() {
@@ -35,9 +40,9 @@ async function savePost() {
         const img = new Image();
         let imggg;
         img.src = URL.createObjectURL(postImgEl.files[0]);
-
-        img.onload = async function() {
-            imggg = await compressImage(img, 0.15);
+        imggg = document.querySelector("#preview").src;
+        //img.onload = async function() {
+            //imggg = await compressImage(img, 0.15);
             let d = new Date();
             let day = d.getDate();
             if(day.length < 2) {
@@ -57,9 +62,13 @@ async function savePost() {
                 headers: {'content-type': 'application/json'},
                 body: JSON.stringify(delta),
             });
-        };        
+        //};        
     }
-
+    if (socket.readyState === WebSocket.OPEN) {
+        broadcastEvent(userName);
+    } else {
+        console.warn('WebSocket not open yet.');
+    }
 }
 function compressImage(image, i) {
     return new Promise((resolve, reject) => {
@@ -179,4 +188,33 @@ async function deleteCookie() {
         headers: {'content-type': 'application/json',
                     "credentials": "include"},
     });
+}
+
+function configureWebSocket() {
+    socket.onopen = (event) => {
+        this.displayMsg('system', 'websocket', 'connected');
+    };
+    socket.onclose = (event) => {
+        this.displayMsg('system', 'websocket', 'disconnected');
+    };
+    socket.onmessage = async (event) => {
+        const msg = JSON.parse(await event.data.text());
+        this.displayMsg('user', msg.from, "made a post!");
+    };
+    socket.onerror = (error) => {
+        console.error('WebSocket error:', error);
+    };
+}
+
+function displayMsg(clss, from, msg) {
+    const notifEl = document.querySelector('.notif');
+    notifEl.innerHTML = (
+        `<div class="event"><span class="${clss}Event">${from}</span> ${msg}</div>`) + notifEl.innerHTML;
+}
+
+function broadcastEvent(from) {
+    const event = {
+        from: from,
+    };
+    socket.send(JSON.stringify(event));
 }

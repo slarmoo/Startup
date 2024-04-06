@@ -1,5 +1,4 @@
 node_modules
-package-lock.json
-package.json
 dbConfig.json
 .vscode
+vite.config.js

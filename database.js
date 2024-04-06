@@ -34,7 +34,7 @@ async function getPosts() {
     const query = { date: { $gte: compare } };
     const options = {
         limit: 12,
-        sort: { date: -1 }
+        sort: { date: 1 }
     };
 
     const cursor = postCollection.find(query, options);

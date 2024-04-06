@@ -10,9 +10,10 @@ app.use(express.json());
 
 // Serve up the front-end static content hosting
 app.use(express.static('public'));
+app.set("trust proxy", true);
 
 // Router for service endpoints
-var apiRouter = express.Router();
+const apiRouter = express.Router();
 
 function generateFalse() {
     post = Math.random()
@@ -28,6 +29,10 @@ apiRouter.get("/posts", (req, res)=>{
 });
 
 let data;
+
+// app.use((_req, res) => {
+//   res.sendFile('index.html', { root: 'public' });
+// });
 
 apiRouter.post("/post", async (req, res)=>{
     data = req.body;
@@ -97,5 +102,5 @@ app.post('/auth/create', async (req, res) => {
 //final
 app.use(`/api`, apiRouter);
 
-const httpService = app.listen(4000)
+const httpService = app.listen(4000);
 peerProxy(httpService);

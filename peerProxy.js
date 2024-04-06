@@ -5,7 +5,7 @@ function peerProxy(httpServer) {
 
     httpServer.on("upgrade", (request, socket, head) => {
         wss.handleUpgrade(request, socket, head, function done(ws) {
-            wss.emit("commection", ws, request);
+            wss.emit("connection", ws, request);
         });
     });
 
@@ -23,16 +23,29 @@ function peerProxy(httpServer) {
             });
         });
 
-
         ws.on("close", () => {
-            const pos = connections.findIndex((o, i) => i.id === connection.id);
+            const pos = connections.findIndex((o, i) => o.id === connection.id);
 
             if (pos >= 0) {
                 connections.splice(pos, 1);
             }
         })
+
+        ws.on("pong", () => {
+            connection.alive = true;
+        });
     });
 
+    setInterval(() => {
+        connections.forEach((c) => {
+            if (!c.alive) {
+                c.ws.terminate();
+            } else {
+                c.alive = false;
+                c.ws.ping();
+            }
+        });
+    }, 10000);
 }
 
 module.exports = { peerProxy }
