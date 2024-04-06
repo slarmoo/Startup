@@ -1,28 +1,31 @@
 //settings
 main();
-async function main(){
-let userName;
-let username = await fetch("/user/me", {
-    method: 'GET',
-    headers: {'content-type': 'application/json',
-                "credentials": "include"},
-});
-if(username.ok) {
-    console.log("ok");
-} else {
-    window.location.href = "index.html"
-}
-const userData = await username.json();
-userName = uppercase(userData.username);
-document.querySelector("#userName").innerText = userName;
-function uppercase(word) {
-    let newWord = word[0].toUpperCase();
-    for(let i = 1; i < word.length; i++) {
-        newWord = newWord + word[i];
+async function main() {
+    let userName;
+    let username = await fetch("/user/me", {
+        method: 'GET',
+        headers: {
+            'content-type': 'application/json',
+            "credentials": "include"
+        },
+    });
+    if (username.ok) {
+        console.log("ok");
+    } else {
+        window.location.href = "index.html"
     }
-    return newWord;
-}
-setTheme();
+    const userData = await username.json();
+    userName = uppercase(userData.username);
+    document.querySelector("#userName").innerText = userName;
+    function uppercase(word) {
+        let newWord = word[0].toUpperCase();
+        for (let i = 1; i < word.length; i++) {
+            newWord = newWord + word[i];
+        }
+        return newWord;
+    }
+    setTheme();
+    configureWebSocket();
 }
 
 function setTheme() {
@@ -88,3 +91,26 @@ async function deleteCookie() {
                     "credentials": "include"},
     });
 }
+
+function configureWebSocket() {
+    const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+    const socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+    socket.onopen = (event) => {
+        this.displayMsg('system', 'websocket', 'connected');
+    };
+    socket.onclose = (event) => {
+        this.displayMsg('system', 'websocket', 'disconnected');
+    };
+    socket.onmessage = async (event) => {
+        const msg = JSON.parse(await event.data.text());
+        this.displayMsg('user', msg.from, "made a post!");
+    };
+}
+
+function displayMsg(clss, from, msg) {
+    const notifEl = document.querySelector('.notif');
+    notifEl.innerHTML = (
+        `<div class="event"><span class="${clss}Event">${from}</span> ${msg}</div>`) + notifEl.innerHTML;
+}
+
+displayMsg("test", "browser", "is working hopefully");
