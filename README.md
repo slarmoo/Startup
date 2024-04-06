@@ -81,3 +81,12 @@ For this deliverable I associate the votes with the logged in user. I stored the
 + existing user - Can login page only if the account already exists, and posts in browse displays the username of who posted it.
 + Use MongoDB to store credentials - Stores the user and their posts.
 + Restricts functionality - Cannot post or browse until logged in.
+
+### Websocket Deliverable
+
+For this deliverable I used webSocket to update the votes on the frontend in realtime.
+
++ Backend listens for WebSocket connection - done!
++ Frontend makes WebSocket connection - done!
++ Data sent over WebSocket connection - done!
++ WebSocket data displayed - It took forever, but I managed to make it so that when someone makes a post, everyone else gets a message. Additionally, it displays the post that was made. 
