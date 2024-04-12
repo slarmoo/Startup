@@ -22,7 +22,7 @@ function App() {
                 </header>
 
                 <main>
-                    <nav>
+                    <nav className="sidebar">
                         <h2 className="text1">Browse</h2>
                         <h3 id="userName" className="text1">{userName}</h3>
                         <menu>
@@ -34,26 +34,26 @@ function App() {
                         <div className="notif"></div>
                     </nav>
 
-                    <Routes>
-                        <Route path='/'
-                            element={
-                                <Login
-                                    userName={userName}
-                                    authState={authState}
-                                    onAuthChange={(userName, authState) => {
-                                        setAuthState(authState);
-                                        setUserName(userName);
-                                    }}
-                                />
-                            }
-                            exact
-                        />
-                        <Route path='/create' element={<Create userName={userName} />} />
-                        <Route path='/browse' element={<Browse userName={userName} />} />
-                        <Route path='/post' element={<Post userName={userName} />} />
-                        <Route path='/settings' element={<Settings userName={userName} />} />
-                        <Route path='*' element={<NotFound />} />
-                    </Routes>
+                        <Routes>
+                            <Route path='/'
+                                element={
+                                    <Login
+                                        userName={userName}
+                                        authState={authState}
+                                        onAuthChange={(userName, authState) => {
+                                            setAuthState(authState);
+                                            setUserName(userName);
+                                        }}
+                                    />
+                                }
+                                exact
+                            />
+                            <Route path='/create' element={<Create userName={userName} />} />
+                            <Route path='/browse' element={<Browse userName={userName} />} />
+                            <Route path='/post' element={<Post userName={userName} />} />
+                            <Route path='/settings' element={<Settings userName={userName} />} />
+                            <Route path='*' element={<NotFound />} />
+                        </Routes>
                 </main>
 
                 <footer>

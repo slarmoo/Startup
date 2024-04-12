@@ -1,72 +1,16 @@
-* {
-    font-family: arial;
-    color: white;
-    box-sizing: border-box;
-}
-
-html {
-    height: 100%;
-}
-
-body {
-    display: flex;
-    flex-direction: column;
-    background: linear-gradient(to right, #C92424, #DB1A1A);
-    margin: 0;
-    height: 100%;
-}
-
-hr {
-    display: none;
-}
-
-header {
-    flex: 0, 70px;
-    background: linear-gradient(to right, #ffC814, #FFDE14);
-    padding: 1em;
-    border-bottom: solid black 2px;
-}
-
-#title {
-    margin-right: 0.5em;
-}
-
-main {
-    flex: 1;
-    display: flex;
-    flex-direction: row;
-}
-
-nav {
-    flex: 0, 100px;
-    background: #212121;
-    padding: 0.5em;
-    border-right: solid black 2px;
-}
-
-menu {
-    padding: 0;
-    margin: 0.5em;
-    justify-content: start;
-    align-items: center;
-}
-
-li {
-    list-style: circle;
-}
-
-.bulk {
+#loginBulk {
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    justify-self: center;
     background-color: #212121;
     border: solid black 5px;
     margin:2em;
 }
 
-.bulk > * {
+#loginBulk > * {
     margin: 0.5em;
     display: flex;
 }
@@ -75,14 +19,6 @@ li {
     font-size: 2em;
     font-weight: bolder;
     margin-bottom:0;
-}
-
-.text1 {
-    margin-right: 0.5em;
-}
-
-input {
-    color: black;
 }
 
 #loginnew {
@@ -102,31 +38,4 @@ input {
 #new {
     flex:1;
     justify-content: end;
-}
-
-a.link:hover {
-    color: #0e8e12;
-}
-
-a.link2:hover {
-    color: #0e8e12;
-}
-
-a.link {
-    color: white;
-}
-
-a.link2 {
-    color: black;
-}
-
-footer {
-    flex: 0, 30px;
-    background: linear-gradient(to right, #ffC814, #FFDE14);;
-    padding: 1em;
-    border-top: solid black 2px;
-}
-
-footer > * {
-    padding: 0.25em;
 }
