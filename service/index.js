@@ -30,10 +30,6 @@ apiRouter.get("/posts", (req, res)=>{
 
 let data;
 
-// app.use((_req, res) => {
-//   res.sendFile('index.html', { root: 'public' });
-// });
-
 apiRouter.post("/post", async (req, res)=>{
     data = req.body;
     await DB.addPost(data);

@@ -8,6 +8,8 @@ export default defineConfig({
         target: 'ws://localhost:4000',
         ws: true,
       },
+      '/auth': "http://localhost:4000",
+      '/user': "http://localhost:4000",
     },
   },
 });

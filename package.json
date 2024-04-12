@@ -1,20 +1,25 @@
 {
-    "name": "simon-react",
-    "version": "0.1.0",
-    "private": true,
-    "scripts": {
-        "dev": "vite",
-        "build": "vite build",
-        "preview": "vite preview"
-    },
-    "devDependencies": {
-        "vite": "^4.3.2"
-    },
-    "dependencies": {
-        "bootstrap": "^5.2.3",
-        "react": "^18.2.0",
-        "react-bootstrap": "^2.7.0",
-        "react-dom": "^18.2.0",
-        "react-router-dom": "^6.22.3"
-    }
+  "name": "simon-react",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^4.5.3"
+  },
+  "dependencies": {
+    "bootstrap": "^5.2.3",
+    "react": "^18.2.0",
+    "react-bootstrap": "^2.7.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.22.3"
+  },
+  "description": "Do you have a social media addiction? Try out Taco Talk, the social media that only works on Tuesdays! (Or whatever day you set for yourself in the settings). Using Taco Talk, you can still communicate with your friends while limiting the amount of time that you waste. You can comment on friend's pages and post things to your own. Taco Talk is *the* social media for talking with friends whilst still curbing your social media addiction.",
+  "main": "vite.config.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }

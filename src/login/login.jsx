@@ -1,26 +1,23 @@
 import React from 'react';
-import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
-import "./login.css"
+import { NavLink, useNavigate } from 'react-router-dom';
+import "./login.css";
 
 export function Login() {
+    const [userName, setUserName] = React.useState("");
+    const [password, setPassword] = React.useState("");
+    const navigate = useNavigate();
 
-    async function login() {
-        const nameEl = document.querySelector("#username");
-        const passEl = document.querySelector("#password");
-        if (passEl.value && passEl.value != "") {
-
+    async function login() {    
+        if (password && userName != "") {
             try {
                 const response = await fetch('/auth/login', {
                     method: 'POST',
                     headers: { 'content-type': 'application/json' },
-                    body: JSON.stringify({ username: nameEl.value, password: passEl.value }),
+                    body: JSON.stringify({ username: userName, password: password }),
                 });
                 if (response.ok) {
-                    const el = document.querySelector(".error");
-                    if (el != null) {
-                        el.remove();
-                    }
-                    //window.location.href = "browse.html";
+                    console.log("Fetch successful");
+                    navigate("/browse");
                 } else {
                     throw new Error("Incorrect username or password");
                 }
@@ -46,10 +43,10 @@ export function Login() {
                 <p className="text1">Welcome</p>
             </div>
             <div>
-                <label className="text1">Username: </label><input required id="username" />
+                <label className="text1">Username: </label><input required id="username" value={userName} onChange={(e) => setUserName(e.target.value)} />
             </div>
             <div>
-                <label className="text1">Password: </label><input type="password" required id="password" />
+                <label className="text1">Password: </label><input type="password" required id="password" onChange={(e) => setPassword(e.target.value)} />
             </div>
             <div id="loginnew">
                 <button id="login" onClick={() => login()} className="text1">Login</button>
