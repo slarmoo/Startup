@@ -3,7 +3,7 @@ import "./post.css"
 
 export function Post() {
     return (
-        <div className="bulk text1">
+        <div className="text1" id="postBulk">
             <textarea id="postText"></textarea>
             <div>
                 <input id="postImg" type="file" accept=".jpeg,.png,.tiff,.jpg" class="text1" onchange="preview()" />

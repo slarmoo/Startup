@@ -3,7 +3,7 @@ import "./settings.css"
 
 export function Settings() {
     return (
-        <div class="bulk">
+        <div id="settingsBulk">
             <div>
                 <label class="text1">Access Day: </label>
                 <select id="day" onchange="setDay()">

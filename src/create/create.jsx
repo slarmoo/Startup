@@ -3,7 +3,7 @@ import "./create.css"
 
 export function Create() {
     return (
-        <div class="bulk">
+        <div id="createBulk">
             <div class="card">
                 <label class="text1">Username: </label><input required id="username" />
             </div>
