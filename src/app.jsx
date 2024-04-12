@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
-import { Login } from './login/login';
+import { Login } from './login/login.jsx';
 import { Create } from './create/create';
 import { Browse } from './browse/browse';
 import { Post } from './post/post';
@@ -26,10 +26,10 @@ function App() {
                         <h2 className="text1">Browse</h2>
                         <h3 id="userName" className="text1">{userName}</h3>
                         <menu>
-                            <li className="text1"><NavLink href="browse.html" className="link">Browse</NavLink></li>
-                            <li className="text1"><NavLink href="post.html" className="link">Post</NavLink></li>
-                            <li className="text1"><NavLink href="settings.html" className="link">Settings</NavLink></li>
-                            <li className="text1"><NavLink onClick="deleteCookie()" href="index.html" className="link">Logout</NavLink></li>
+                            <li className="text1"><NavLink to="browse" className="link">Browse</NavLink></li>
+                            <li className="text1"><NavLink to="post" className="link">Post</NavLink></li>
+                            <li className="text1"><NavLink to="settings" className="link">Settings</NavLink></li>
+                            <li className="text1"><NavLink onClick="deleteCookie()" to="/" className="link">Logout</NavLink></li>
                         </menu>
                         <div className="notif"></div>
                     </nav>
