@@ -16,34 +16,49 @@ function App() {
 
     return (
         <BrowserRouter>
-            <div>
+            <div className="body">
                 <header>
-                    <h1 id="title" class="text1" style="display:inline">Taco Talk</h1> <img src={logo} alt="TacoTalk logo" width="50" style="display:inline" />
+                    <h1 id="title" className="text1" style={{ display: "inline" }}>Taco Talk</h1> <img src={logo} alt="TacoTalk logo" width="50" style={{ display: "inline" }} />
                 </header>
 
-                <Routes>
-                    <Route path='/'
-                        element={
-                            <Login
-                                userName={userName}
-                                authState={authState}
-                                onAuthChange={(userName, authState) => {
-                                    setAuthState(authState);
-                                    setUserName(userName);
-                                }}
-                            />
-                        }
-                        exact
-                    />
-                    <Route path='/create' element={<Create userName={userName} />} />
-                    <Route path='/browse' element={<Browse userName={userName} />} />
-                    <Route path='/post' element={<Post userName={userName} />} />
-                    <Route path='/settings' element={<Settings userName={userName} />} />
-                    <Route path='*' element={<NotFound />} />                    
-                </Routes>
+                <main>
+                    <nav>
+                        <h2 className="text1">Browse</h2>
+                        <h3 id="userName" className="text1">{userName}</h3>
+                        <menu>
+                            <li className="text1"><NavLink href="browse.html" className="link">Browse</NavLink></li>
+                            <li className="text1"><NavLink href="post.html" className="link">Post</NavLink></li>
+                            <li className="text1"><NavLink href="settings.html" className="link">Settings</NavLink></li>
+                            <li className="text1"><NavLink onClick="deleteCookie()" href="index.html" className="link">Logout</NavLink></li>
+                        </menu>
+                        <div className="notif"></div>
+                    </nav>
+
+                    <Routes>
+                        <Route path='/'
+                            element={
+                                <Login
+                                    userName={userName}
+                                    authState={authState}
+                                    onAuthChange={(userName, authState) => {
+                                        setAuthState(authState);
+                                        setUserName(userName);
+                                    }}
+                                />
+                            }
+                            exact
+                        />
+                        <Route path='/create' element={<Create userName={userName} />} />
+                        <Route path='/browse' element={<Browse userName={userName} />} />
+                        <Route path='/post' element={<Post userName={userName} />} />
+                        <Route path='/settings' element={<Settings userName={userName} />} />
+                        <Route path='*' element={<NotFound />} />
+                    </Routes>
+                </main>
 
                 <footer>
-
+                    <label className="text1">Creator: Matthew Medford</label>
+                    <a href="https://github.com/slarmoo/Startup/tree/main" className="link">Github</a>
                 </footer>
             </div>
         </BrowserRouter>

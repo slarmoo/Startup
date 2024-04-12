@@ -1,0 +1,121 @@
+* {
+    font-family: arial;
+    color: white;
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+}
+
+.body {
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(to right, #C92424, #DB1A1A);
+    margin: 0;
+    height: 100%;
+}
+
+header {
+    flex: 0, 70px;
+    background: linear-gradient(to right, #ffC814, #FFDE14);
+    padding: 1em;
+    border-bottom: solid black 2px;
+}
+
+#title {
+    margin-right: 0.5em;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+}
+
+nav {
+    flex: 0, 100px;
+    background: #212121;
+    padding: 0.5em;
+    border-right: solid black 2px;
+}
+
+menu {
+    padding: 0;
+    margin: 0.5em;
+    justify-content: start;
+    align-items: center;
+}
+
+li {
+    list-style: circle;
+}
+
+.bulk {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.text1 {
+    margin-right: 0.5em;
+}
+
+textarea {
+    color: black;
+}
+
+@media (orientation: landscape) {
+    .bulk {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+}
+
+@media (orientation: portrait) {
+    .bulk {
+        grid-template-columns: repeat(1, 400px);
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.bulk {
+    height: 100%;
+    display: grid;
+    grid-auto-rows: 400px;
+    grid-gap: 1em;
+}
+
+
+.text1 {
+    margin-right: 0.5em;
+}
+
+a.link:hover {
+    color: #0e8e12;
+}
+
+a.link2:hover {
+    color: #0e8e12;
+}
+
+a.link {
+    color: white;
+}
+
+a.link2 {
+    color: black;
+}
+
+footer {
+    flex: 0, 30px;
+    background: linear-gradient(to right, #ffC814, #FFDE14);
+    padding: 1em;
+    border-top: solid black 2px;
+}
+
+footer>* {
+    padding: 0.25em;
+}
