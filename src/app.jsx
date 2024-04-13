@@ -13,6 +13,7 @@ function App() {
     const [userName, setUserName] = React.useState(localStorage.getItem('userName') || '');
     const currentAuthState = userName ? AuthState.Authenticated : AuthState.Unauthenticated;
     const [authState, setAuthState] = React.useState(currentAuthState);
+    const [place, setPlace] = React.useState("Login");
 
     const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
     const socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
@@ -46,8 +47,12 @@ function App() {
     }
 
     function displayMsg(clss, from, msg) {
-        console.log(notifs);
         notifs.push(`<div class="event"><span class="${clss}Event">${from}</span> ${msg}</div>`);
+    }
+
+    function logout() {
+        deleteCookie()
+        setPlace("Login")
     }
 
     return (
@@ -59,13 +64,13 @@ function App() {
 
                 <main>
                     <nav className="sidebar">
-                        <h2 className="text1">Browse</h2>
+                        <h2 className="text1">{place}</h2>
                         <h3 id="userName" className="text1">{userName}</h3>
                         <menu>
-                            <li className="text1"><NavLink to="browse" className="link">Browse</NavLink></li>
-                            <li className="text1"><NavLink to="post" className="link">Post</NavLink></li>
-                            <li className="text1"><NavLink to="settings" className="link">Settings</NavLink></li>
-                            <li className="text1"><NavLink onClick={() => deleteCookie()} to="/" className="link">Logout</NavLink></li>
+                            <li className="text1"><NavLink onClick={() => setPlace("Browse")} to="browse" className="link">Browse</NavLink></li>
+                            <li className="text1"><NavLink onClick={() => setPlace("Post")} to="post" className="link">Post</NavLink></li>
+                            <li className="text1"><NavLink onClick={() => setPlace("Settings")} to="settings" className="link">Settings</NavLink></li>
+                            <li className="text1"><NavLink onClick={() => logout()} to="/" className="link">Logout</NavLink></li>
                         </menu>
                         <div className="notif">{notifs}</div>
                     </nav>
@@ -80,14 +85,15 @@ function App() {
                                             setAuthState(authState);
                                             setUserName(userName);
                                         }}
+                                        setPlace={setPlace}
                                     />
                                 }
                                 exact
                             />
-                            <Route path='/create' element={<Create userName={userName} socket={socket} />} />
+                        <Route path='/create' element={<Create userName={userName} setPlace={place} />} />
                             <Route path='/browse' element={<Browse userName={userName} />} />
                             <Route path='/post' element={<Post userName={userName} socket={socket} />} />
-                            <Route path='/settings' element={<Settings userName={userName} />} />
+                        <Route path='/settings' element={<Settings userName={userName} />} />
                             <Route path='*' element={<NotFound />} />
                         </Routes>
                 </main>

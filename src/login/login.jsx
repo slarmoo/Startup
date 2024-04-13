@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import "./login.css";
 
-export function Login() {
+export function Login(above) {
     const [userName, setUserName] = React.useState("");
     const [password, setPassword] = React.useState("");
     const navigate = useNavigate();
@@ -18,6 +18,7 @@ export function Login() {
                 });
                 if (response.ok) {
                     console.log("Fetch successful");
+                    above.setPlace("Browse");
                     navigate("/browse");
                 } else {
                     throw new Error("Incorrect username or password");
@@ -42,7 +43,9 @@ export function Login() {
                 </div>
                 <div id="loginnew">
                     <button id="login" onClick={() => login()} className="text1">Login</button>
-                    <NavLink to="create" id="new" className="link">New User?</NavLink>
+                    <NavLink to="create" id="new" className="link" >New User?</NavLink>
+                </div>
+                <div>
                     <p>Incorrect username or password</p>
                 </div>
             </div>

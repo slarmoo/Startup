@@ -10,6 +10,7 @@ const client = new MongoClient(url);
 
 const postCollection = client.db('startup').collection('posts');
 const userCollection = client.db('startup').collection('users');
+const settingsCollection = client.db('startup').collection('settings');
 
 (async function testConnection() {
 await client.connect();
@@ -65,6 +66,10 @@ async function createUser(username, password) {
     await userCollection.insertOne(user);
 
     return user;
-  }
+}
+  
+function getSettings(username) {
+    return settingsCollection.findOne({user: username})
+}
 
-module.exports = { getPosts, addPost, getUser, createUser, getToken };
+module.exports = { getPosts, addPost, getUser, createUser, getToken, getSettings };

@@ -2,7 +2,7 @@ import React from 'react';
 import { Navigate, NavLink } from 'react-router-dom';
 import "./create.css"
 
-export function Create() {
+export function Create(above) {
     const [userName, setUserName] = React.useState("");
     const [password, setPassword] = React.useState("");
     const [confirm, setConfirm] = React.useState("");
@@ -59,7 +59,7 @@ export function Create() {
                         <button onClick={() => create()} className="text1" id="button">Sign Up</button>
                     </div>
                     <div className="card" id="signin">
-                        <NavLink to="/" className="link">Already have an account?</NavLink>
+                        <NavLink to="/" className="link" >Already have an account?</NavLink>
                     </div>
                 </div>
                 <div className="card">

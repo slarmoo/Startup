@@ -95,6 +95,11 @@ app.post('/auth/create', async (req, res) => {
     res.send('Cookie deleted successfully');
   })
 
+  app.get("/user/settings", async (req, res) => {
+    const settings = await DB.getSettings(req.body.username);
+    res.send({ day:settings.day, theme:settings.theme });
+  })
+
 //final
 app.use(`/api`, apiRouter);
 
