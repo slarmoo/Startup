@@ -6,6 +6,7 @@ export function Login() {
     const [userName, setUserName] = React.useState("");
     const [password, setPassword] = React.useState("");
     const navigate = useNavigate();
+    const [error, setError] = React.useState(false);
 
     async function login() {    
         if (password && userName != "") {
@@ -23,35 +24,46 @@ export function Login() {
                 }
             } catch (error) {
                 console.log(error.message);
-                const el = document.querySelector(".error");
-                if (el != null) {
-                    const p = document.createElement("p");
-                    p.innerText = error.message;
-                    p.classList.add("error");
-                    document.querySelector(".bulk").appendChild(p);
-                }
+                setError(true);
             }
         }
-        else {
-            document.querySelector("#welcome").innerHTML = "Make sure you enter a password";
-        }
     }
-
-    return (
-        <div id="loginBulk">
-            <div id="welcome">
-                <p className="text1">Welcome</p>
+    if (error) {
+        return (
+            <div id="loginBulk">
+                <div id="welcome">
+                    <p className="text1">Welcome</p>
+                </div>
+                <div>
+                    <label className="text1">Username: </label><input required id="username" value={userName} onChange={(e) => setUserName(e.target.value)} />
+                </div>
+                <div>
+                    <label className="text1">Password: </label><input type="password" required id="password" onChange={(e) => setPassword(e.target.value)} />
+                </div>
+                <div id="loginnew">
+                    <button id="login" onClick={() => login()} className="text1">Login</button>
+                    <NavLink to="create" id="new" className="link">New User?</NavLink>
+                    <p>Incorrect username or password</p>
+                </div>
             </div>
-            <div>
-                <label className="text1">Username: </label><input required id="username" value={userName} onChange={(e) => setUserName(e.target.value)} />
+        )
+    } else {
+        return (
+            <div id="loginBulk">
+                <div id="welcome">
+                    <p className="text1">Welcome</p>
+                </div>
+                <div>
+                    <label className="text1">Username: </label><input required id="username" value={userName} onChange={(e) => setUserName(e.target.value)} />
+                </div>
+                <div>
+                    <label className="text1">Password: </label><input type="password" required id="password" onChange={(e) => setPassword(e.target.value)} />
+                </div>
+                <div id="loginnew">
+                    <button id="login" onClick={() => login()} className="text1">Login</button>
+                    <NavLink to="create" id="new" className="link">New User?</NavLink>
+                </div>
             </div>
-            <div>
-                <label className="text1">Password: </label><input type="password" required id="password" onChange={(e) => setPassword(e.target.value)} />
-            </div>
-            <div id="loginnew">
-                <button id="login" onClick={() => login()} className="text1">Login</button>
-                <NavLink to="create" id="new" className="link">New User?</NavLink>
-            </div>
-        </div>
-    )
+        )
+    }
 }

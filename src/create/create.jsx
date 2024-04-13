@@ -8,6 +8,7 @@ export function Create() {
     const [confirm, setConfirm] = React.useState("");
     const [birth, setBirth] = React.useState("");
     const parsedDate = birth.split("-");
+    const [error, setError] = React.useState(false);
 
     async function create() {
         if (password && password != "") {
@@ -26,16 +27,7 @@ export function Create() {
                         }
                     } catch (error) {
                         console.log(error.message);
-                        const el = document.querySelector(".er");
-                        if (el == null) {
-                            const div = document.createElement("div");
-                            const p = document.createElement("p");
-                            div.classList.add("er");
-                            document.querySelector(".bulk").appendChild(div);
-                            p.innerText = error.message;
-                            p.classList.add("error");
-                            document.querySelector(".er").appendChild(p);
-                        }
+                        setError(true);
                     }
                 } else {
                     document.querySelector("#feedback").innerHTML = "You aren't old enough";
@@ -47,32 +39,61 @@ export function Create() {
             document.querySelector("#feedback").innerHTML = "Make sure you enter a password";
         }
     }
-
-    return (
-        <div id="createBulk">
-            <div className="card">
-                <label className="text1">Username: </label><input required id="username" value={userName} onChange={(e) => setUserName(e.target.value)} />
-            </div>
-            <div className="card">
-                <label className="text1">Date of Birth: </label><input type="date" required id="birth" value={birth} onChange={(e) => setBirth(e.target.value)} />
-            </div>
-            <div className="card">
-                <label className="text1">Password: </label><input type="password" required id="password" onChange={(e) => setPassword(e.target.value)} />
-            </div>
-            <div className="card">
-                <label className="text1">Comfirm Password: </label><input type="password" required id="comfirm" onChange={(e) => setConfirm(e.target.value)} />
-            </div>
-            <div id="wrapper">
-                <div className="card" id="signup">
-                    <button onClick={() => create()} className="text1" id="button">Sign Up</button>
+    if (error) {
+        return (
+            <div id="createBulk">
+                <div className="card">
+                    <label className="text1">Username: </label><input required id="username" value={userName} onChange={(e) => setUserName(e.target.value)} />
                 </div>
-                <div className="card" id="signin">
-                    <NavLink to="/" className="link">Already have an account?</NavLink>
+                <div className="card">
+                    <label className="text1">Date of Birth: </label><input type="date" required id="birth" value={birth} onChange={(e) => setBirth(e.target.value)} />
+                </div>
+                <div className="card">
+                    <label className="text1">Password: </label><input type="password" required id="password" onChange={(e) => setPassword(e.target.value)} />
+                </div>
+                <div className="card">
+                    <label className="text1">Comfirm Password: </label><input type="password" required id="comfirm" onChange={(e) => setConfirm(e.target.value)} />
+                </div>
+                <div id="wrapper">
+                    <div className="card" id="signup">
+                        <button onClick={() => create()} className="text1" id="button">Sign Up</button>
+                    </div>
+                    <div className="card" id="signin">
+                        <NavLink to="/" className="link">Already have an account?</NavLink>
+                    </div>
+                </div>
+                <div className="card">
+                    <p id="feedback" className="text1">Incorrect Username or Password</p>
                 </div>
             </div>
-            <div className="card">
-                <p id="feedback" className="text1"></p>
+        )
+    } else {
+        return (
+            <div id="createBulk">
+                <div className="card">
+                    <label className="text1">Username: </label><input required id="username" value={userName} onChange={(e) => setUserName(e.target.value)} />
+                </div>
+                <div className="card">
+                    <label className="text1">Date of Birth: </label><input type="date" required id="birth" value={birth} onChange={(e) => setBirth(e.target.value)} />
+                </div>
+                <div className="card">
+                    <label className="text1">Password: </label><input type="password" required id="password" onChange={(e) => setPassword(e.target.value)} />
+                </div>
+                <div className="card">
+                    <label className="text1">Comfirm Password: </label><input type="password" required id="comfirm" onChange={(e) => setConfirm(e.target.value)} />
+                </div>
+                <div id="wrapper">
+                    <div className="card" id="signup">
+                        <button onClick={() => create()} className="text1" id="button">Sign Up</button>
+                    </div>
+                    <div className="card" id="signin">
+                        <NavLink to="/" className="link">Already have an account?</NavLink>
+                    </div>
+                </div>
+                <div className="card">
+                    <p id="feedback" className="text1"></p>
+                </div>
             </div>
-        </div>
-    )
+        )
+    }
 }
