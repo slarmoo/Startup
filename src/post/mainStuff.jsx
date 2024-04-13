@@ -4,9 +4,6 @@ export function MainStuff(above) {
     const [postText, setPostText] = React.useState("");
     const [previewSource, setPreviewSource] = React.useState("");
     const[error, setError] = React.useState(false);
-    // React.useEffect(() => {
-    //     console.log(previewSource);
-    // }, [previewSource]);
 
     async function preview(e) {
         let file = e;
@@ -27,9 +24,7 @@ export function MainStuff(above) {
     }
 
     async function savePost() {
-        console.log(postText, previewSource);
         if (postText != "" && previewSource != "") {
-            console.log("post1")
             const img = new Image();
             let d = new Date();
             let day = d.getDate();
@@ -40,7 +35,6 @@ export function MainStuff(above) {
             let date = month.toString() + day.toString();
             date = Number(date);
 
-            console.log("post2")
             let username = await fetch("/user/me", {
                 method: 'GET',
                 headers: {
@@ -51,7 +45,6 @@ export function MainStuff(above) {
             const userData = await username.json();
             const userName = userData.username;
             const delta = { text: postText, image: previewSource, date: date, user: userName };
-            console.log("post3")
 
             const newPost = fetch("/api/post", {
                 method: 'POST',
@@ -113,7 +106,12 @@ export function MainStuff(above) {
         access = "Friday";
     }
     if (dayParser[day] !== access) {
-        return <div style={{ justifySelf: "center", alignSelf: "center" }} id="postBulk">Unable to access website today. Try again on {access}.</div>;
+        return (
+            <div className="browseBulk" style={{
+                justifySelf: "center", alignSelf: "center", flex: "1", padding: "2em", textAlign: "center",
+                justifyContent: "center", background: "#212121", border: "solid black 5px", margin: "2em", height: "80%",
+            }}>Unable to access website today. Try again on {access}.</div>
+        )
     } else if (error) { 
         return (<div className="text1" id="postBulk">
             <textarea id="postText" value={postText} onChange={(e) => setPostText(e.target.value)}></textarea>
