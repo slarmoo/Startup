@@ -58,47 +58,66 @@ app.post('/auth/create', async (req, res) => {
             id: user._id,
         });
     }
+});
+
+function setAuthCookie(res, authToken) {
+  res.cookie('token', authToken, {
+    secure: true,
+    httpOnly: true,
+    sameSite: 'strict',
   });
+}
 
-  function setAuthCookie(res, authToken) {
-    res.cookie('token', authToken, {
-      secure: true,
-      httpOnly: true,
-      sameSite: 'strict',
-    });
-  }
-
-  app.post('/auth/login', async (req, res) => {
-    const user = await DB.getUser(req.body.username);
-    if (user) {
-      if (await bcrypt.compare(req.body.password, user.password)) {
-        setAuthCookie(res, user.token);
-        res.send({ id: user._id });
-        return;
-      }
-    }
-    res.status(401).send({ msg: 'Unauthorized' });
-  });
-
-  app.get('/user/me', async (req, res) => {
-    authToken = req.cookies['token'];
-    const user = await DB.getToken(authToken);
-    if (user) {
-      res.send({ username: user.username });
+app.post('/auth/login', async (req, res) => {
+  const user = await DB.getUser(req.body.username);
+  if (user) {
+    if (await bcrypt.compare(req.body.password, user.password)) {
+      setAuthCookie(res, user.token);
+      res.send({ id: user._id });
       return;
     }
-    res.status(401).send({ msg: 'Unauthorized' });
-  });
+  }
+  res.status(401).send({ msg: 'Unauthorized' });
+});
 
-  app.get("/user/expire", async (req, res) => {
-    res.clearCookie('token', { path: '/' }); 
-    res.send('Cookie deleted successfully');
-  })
+app.get('/user/me', async (req, res) => {
+  authToken = req.cookies['token'];
+  const user = await DB.getToken(authToken);
+  if (user) {
+    res.send({ username: user.username });
+    return;
+  }
+  res.status(401).send({ msg: 'Unauthorized' });
+});
 
-  app.get("/user/settings", async (req, res) => {
-    const settings = await DB.getSettings(req.body.username);
-    res.send({ day:settings.day, theme:settings.theme });
-  })
+app.get("/user/expire", async (req, res) => {
+  res.clearCookie('token', { path: '/' }); 
+  res.send('Cookie deleted successfully');
+})
+
+app.get("/user/findSettings", async (req, res) => {
+  authToken = req.cookies['token'];
+  const user = await DB.getToken(authToken);
+  if (user) {
+    const settings = await DB.getSettings(user.username);
+    if (settings) {
+      res.send(settings);
+    } else {
+      res.send({ username: req.body.username, day: "Tuesday", theme: "dark" });
+    }
+    return;
+  }
+  res.status(401).send({ msg: 'Unauthorized' });
+})
+
+app.post("/user/settings", async (req, res) => {
+  const settings = await DB.setSettings(req.body.username, req.body.day, req.body.theme);
+  if (settings) {
+    res.send(settings);
+  } else {
+    res.send({ username: req.body.username, day: "Tuesday", theme: "dark" });
+  }
+})
 
 //final
 app.use(`/api`, apiRouter);

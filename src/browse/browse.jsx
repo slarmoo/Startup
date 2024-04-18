@@ -2,7 +2,11 @@ import React from 'react';
 import "./browse.css"
 let postsData = [];
 export function Browse() {
-    main();
+    React.useEffect(() => {
+        main();
+    }, []);
+
+    // const [newDay, setNewDay] = React.useState("Tuesday");
 
     async function main() {
         let username = await fetch("/user/me", {
@@ -45,15 +49,25 @@ export function Browse() {
             </div>
         ));
     }
+    // getDate();
+    // async function getDate() {
+    //     const response = await fetch('/user/settings', {
+    //         method: 'GET',
+    //         headers: { 'content-type': 'application/json' },
+    //     });
+    //     const settings = await response.json();
+    //     console.log(settings);
+    //     setNewDay(settings["day"]);
+    // }
 
-    let d = new Date();
-    let day = d.getDay();
-    const dayParser = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-    let access = localStorage.getItem("day");
-    if (!access) {
-        access = "Friday";
-    }
-    if (dayParser[day] != access) {
+    // let d = new Date();
+    // let day = d.getDay();
+    // const dayParser = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    // let access = newDay;
+    // if (!access) {
+    //     access = "Tuesday";
+    // }
+    if (false) {
         return (
             <div className="browseBulk" style={{
                 justifySelf: "center", alignSelf: "center", flex: "1", padding: "2em", textAlign: "center",

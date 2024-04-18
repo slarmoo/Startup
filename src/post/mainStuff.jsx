@@ -5,6 +5,23 @@ export function MainStuff(above) {
     const [previewSource, setPreviewSource] = React.useState("");
     const[error, setError] = React.useState(false);
 
+    let userName;
+    
+    React.useEffect(() => {
+        main();
+    }, []);
+
+    async function main() {
+        let username = await fetch("/user/me", {
+            method: 'GET',
+            headers: {
+                'content-type': 'application/json',
+                "credentials": "include"
+            },
+        });
+        const userData = await username.json();
+        userName = userData.username;
+    }
     async function preview(e) {
         let file = e;
         const img = new Image();
@@ -35,15 +52,7 @@ export function MainStuff(above) {
             let date = month.toString() + day.toString();
             date = Number(date);
 
-            let username = await fetch("/user/me", {
-                method: 'GET',
-                headers: {
-                    'content-type': 'application/json',
-                    "credentials": "include"
-                },
-            });
-            const userData = await username.json();
-            const userName = userData.username;
+            
             const delta = { text: postText, image: previewSource, date: date, user: userName };
 
             const newPost = fetch("/api/post", {
@@ -97,15 +106,26 @@ export function MainStuff(above) {
         };
        above.socket.send(JSON.stringify(event));
     }
+    // let newDay = "Tuesday";
+    // getDate();
+    // async function getDate() {
+    //     const response = await fetch('/user/findSettings', {
+    //         method: 'GET',
+    //         headers: { 'content-type': 'application/json', "credentials": "include" },
+    //     });
+    //     const settings = await response.json();
+    //     newDay = settings[day];
+    // }
 
-    let d = new Date();
-    let day = d.getDay();
-    const dayParser = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-    let access = localStorage.getItem("day");
-    if (!access) {
-        access = "Friday";
-    }
-    if (dayParser[day] !== access) {
+    // let d = new Date();
+    // let day = d.getDay();
+    // const dayParser = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    // let access = newDay;
+    // console.log(access);
+    // if (!access) {
+    //     access = "Tuesday";
+    // }
+    if (false) {
         return (
             <div className="browseBulk" style={{
                 justifySelf: "center", alignSelf: "center", flex: "1", padding: "2em", textAlign: "center",

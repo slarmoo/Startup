@@ -69,7 +69,12 @@ async function createUser(username, password) {
 }
   
 function getSettings(username) {
-    return settingsCollection.findOne({user: username})
+    return settingsCollection.findOne({ user: username });
 }
 
-module.exports = { getPosts, addPost, getUser, createUser, getToken, getSettings };
+async function setSettings(username, day, theme) {
+    await settingsCollection.updateOne({ user: username }, { $set: { day: day, theme: theme }});
+    return getSettings(username);
+}
+
+module.exports = { getPosts, addPost, getUser, createUser, getToken, getSettings, setSettings };

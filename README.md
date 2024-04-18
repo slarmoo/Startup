@@ -90,3 +90,12 @@ For this deliverable I used webSocket to update the votes on the frontend in rea
 + Frontend makes WebSocket connection - done!
 + Data sent over WebSocket connection - done!
 + WebSocket data displayed - It took forever, but I managed to make it so that when someone makes a post, everyone else gets a message. Additionally, it displays the post that was made. 
+
+### React Deliverable
+
+For this deliverable I only cried marginally and converted my code to use React.
+
++ Bundled and transpiled - done!
++ Components - Login, create, settings, post, and browse are all components.
++ Router - Routing between login, create, browse, post, and settings components.
++ Hooks - The main function only runs once due to hooks
